@@ -1,2 +1,0 @@
-
-Link(url='https://www.booking.com/content/contact-us.es.html', text='\nContacto corporativo\n', fragment='', nofollow=False)
