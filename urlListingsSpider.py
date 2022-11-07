@@ -10,22 +10,24 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.firefox import GeckoDriverManager
 
 class UrlSpider(object):
-    def __init__(self, checkin, checkout, city, country, adults, children, rooms):
-        """WRITE SUMMARY
+    def __init__(self, checkin, checkout, city, adults, children, rooms):
+        """
+        Initiates the instance of the class
 
         Args:
-            checkin (_type_): _description_
-            checkout (_type_): _description_
-            city (_type_): _description_
-            country (_type_): _description_
-            adults (_type_): _description_
-            children (_type_): _description_
-            rooms (_type_): _description_
+            checkin (str): day of checkin with format "%d-%m-%Y" 
+            checkout (str): day of checkout with format "%d-%m-%Y"
+            city (str): city where the rooms has to be located
+            adults (int): number of adults
+            children (int): number of children
+            rooms (int): number of rooms
+            
+        Returns: 
+            None
         """
         self.checkin = checkin
         self.checkout = checkout
         self.city = city
-        self.country = country
         self.adults = int(adults)
         self.children = int(children)
         self.rooms = int(rooms)
@@ -33,16 +35,21 @@ class UrlSpider(object):
         self.driver = self.set_selenium_driver(self.url)
             
     def set_selenium_driver(self, url):
-        """_summary_
+        """
+        Prepares the driver through which the scraping wil be performed
 
         Args:
-            url (_type_): _description_
+            url (str): url of the first landing page of Booking.com
+            
+        Returns
+            driver: fully prepared selenium driver for scraping
         """
         print("\nPreparing Web Driver\n\n")
         user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
        
        
         options = webdriver.firefox.options.Options()
+        # DECOMENT THIS IF YOU DO NOT WANT TO SEE THE SEARCHING PROCESS IN THE BROWSER
         #options.headless = True
         options.add_argument(f"user-agent={user_agent}")
         driver = webdriver.Firefox(service=webdriver.firefox.service.Service(GeckoDriverManager().install()), options=options)
@@ -64,7 +71,18 @@ class UrlSpider(object):
         return driver
     
     def get_selection_numbers(self):
-        """_summary_
+        """
+        Checks which alternative landing page is being scraped and obtains the number of adults
+        children and rooms in the parameter search grid.
+        
+        Args:
+            None
+        
+        Returns:
+            normal_search (bool): 1 if the landing page follows legible xpaths; 0 if the xpaths are based on codes
+            c_adults (int): number of adults found by default in the search grid
+            c_children (int): number of children found by default in the search grid
+            c_rooms (int): number of rooms found by default in the search grid
         """
         if self.driver.find_elements(by="xpath", value='//*[@data-adults-count=""]') != []:
             normal_search = True
@@ -78,11 +96,17 @@ class UrlSpider(object):
         return normal_search, int(c_adults), int(c_children), int(c_rooms)
         
     def introduce_selection_numbers(self, normal_search, list_selection_numbers):
-        """_summary_
+        """
+        Introduces in the search grid the parameters values inputed when the script is run for the variables nº of adults, 
+        children and rooms. Depending on the landing page the scraper encounters (normal_search equal to 1 or to 2) the values 
+        are introduced using different methods.
 
         Args:
-            normal_search (_type_): _description_
-            list_selection_numbers (_type_): _description_
+            normal_search (bool): 1 if the landing page follows legible xpaths; 0 if the xpaths are based on codes
+            list_selection_numbers (list): list containing the nº of adults, children and rooms
+        
+        Returns:
+            None
         """
         search_params = [self.adults, self.children, self.rooms]
         if normal_search:
@@ -145,41 +169,75 @@ class UrlSpider(object):
                         sl_num -= 1
                 finished = True
     
-    def set_date(self, checkin, checkout):
-        in_day, in_month, in_year = checkin.split("-")
-        out_day, out_month, out_year = checkout.split("-")
+    def set_month_year(self, month, year):
+        """
+        Navigates through the calendar of Booking.com so as to select the correct month and year of checking and checkout, that is to say,
+        the ones that are inputed when running the script.
+
+        Args:
+            month (str): month of checkin/checkout
+            year (str): year of checkin/checkout
+        
+        Returns:
+            None
+        """
         is_good_month_shows = False
         while is_good_month_shows != True:
             time.sleep(2)
-            xpath_calendar = "//*[contains(@aria-live, 'polite')]"
-            current_date = self.driver.find_element(by="xpath", value=xpath_calendar).text
+            current_date = self.driver.find_element(by="xpath", value="//*[contains(@aria-live, 'polite')]").text
             if len(current_date) == 0:
                 current_date = self.driver.find_element(by="xpath", value="//*[contains(@class, 'bui-calendar__wrapper')]")
                 current_date = current_date.text.split(" ")[0:2]
                 current_date[1] = str(''.join(i for i in current_date[1] if i.isdigit()))
 
-            if in_month in current_date and in_year in current_date:
+            if month in current_date and year in current_date:
                 is_good_month_shows = True
             else:
                 try:
                     self.driver.find_element(by="xpath", value="//button[contains(@class, 'c9fa5fc96d be298b15fa')]").click()
                 except:
                     self.driver.find_element(by="xpath", value= "//*[local-name()='div' and contains(@class, 'bui-calendar__control bui-calendar__control--next')]").click()
-            
-        day_xpath = f"//span[contains(@class, 'b21c1c6c83')]"
-        self.driver.find_elements(by="xpath", value=day_xpath)[int(in_day)-1].click()
-        
-        button = f"//*[contains(@class, 'd47738b911 fb1847d86a')]"
-        self.driver.find_elements(by="xpath", value=button)[1].click()
-            
-        day_xpath = f"//span[contains(@class, 'b21c1c6c83')]"
-        self.driver.find_elements(by="xpath", value=day_xpath)[int(out_day)-1].click()
-        
-    def search_listings(self, checkin, checkout, city, country, adults, children, rooms):
-        """_summary_
+                    
+    def set_date(self, checkin, checkout):
+        """
+        Navigates through the calendar of Booking.com so as to select the correct day of checking and checkout, that is to say,
+        the ones that are inputed when running the script.
 
         Args:
-            city (_type_): _description_
+            checkin (str): day of checkin with format "%d-%m-%Y" 
+            checkout (str): day of checkout with format "%d-%m-%Y"
+        
+        Returns:
+            None
+        """
+        in_day, in_month, in_year = checkin.split("-")
+        out_day, out_month, out_year = checkout.split("-")
+            
+        self.set_month_year(in_month, in_year)
+        
+        day_xpath = "//span[contains(@class, 'b21c1c6c83')]"
+        self.driver.find_elements(by="xpath", value=day_xpath)[int(in_day)-1].click()
+        
+        button = "//*[contains(@class, 'd47738b911 fb1847d86a')]"
+        self.driver.find_elements(by="xpath", value=button)[1].click()
+        
+        self.set_month_year(out_month, out_year)
+            
+        day_xpath = "//span[contains(@class, 'b21c1c6c83')]"
+        self.driver.find_elements(by="xpath", value=day_xpath)[int(out_day)-1].click()
+        
+    def search_listings(self, checkin, checkout, city, adults, children, rooms):
+        """
+        General function that comprehends all the functions and selenium fucntionalities related to selecting search parameters 
+        and clicking on search buttons
+
+        Args:
+            checkin (str): day of checkin with format "%d-%m-%Y" 
+            checkout (str): day of checkout with format "%d-%m-%Y"
+            city (str): city where the rooms has to be located
+            adults (int): number of adults
+            children (int): number of children
+            rooms (int): number of rooms
         """
         try:
             self.driver.find_element(by = "xpath", value='//*[@id="ss"]').send_keys(city)
@@ -204,12 +262,44 @@ class UrlSpider(object):
         
         button = f"//*[contains(@class, 'fc63351294 a822bdf511 d4b6b7a9e7 f7db01295e af18dbd5a4 f4605622ad c827b27356')]"
         self.driver.find_element(by="xpath", value=button).click()
-        
-    def save_links(self, current_page):
-        """_summary_
+
+    def get_blocks(self):
+        """
+        Obtains the blocks containing the information of each of the listing appearing in each of the results pages after
+        inputing all the selection criteria.
 
         Returns:
-            _type_: _description_
+            None
+        """
+        return self.driver.find_elements(by="xpath", value="//a[contains(@class, 'e13098a59f')]")
+        
+    def obtain_pages(self):
+        """
+        Obtains the number of the first and last page of the results provided after inputing all the seleciton criteria.
+
+        Returns:
+            start (int): number of the firt page of results (usually "1").
+            end (int): number of the last page of results.
+        """
+        start = int(self.driver.find_element(by="xpath", value="//li[contains(@class, 'f32a99c8d1 ebd02eda9e')]").text)
+        end = int(self.driver.find_elements(by="xpath", value="//li[contains(@class, 'f32a99c8d1')]")[-1].text)
+        return start, end
+    
+    def next_page(self):
+        """
+        Clicks on the results page button that leads to the next page
+        
+        Returns:
+            None
+        """
+        self.driver.find_element(by = "xpath", value = "//*[contains(@aria-label, 'Next page')]").click()
+        
+    def save_links(self, current_page):
+        """
+        Retrieves the links of all of the listings of each results pages and stores it in the file "listing_links.txt"
+
+        Returns:
+            None
         """
         if current_page == 1:
             with open("listing_links.txt", "w") as f:
@@ -221,34 +311,16 @@ class UrlSpider(object):
                 for block in self.get_blocks():
                     href = block.get_attribute("href")
                     f.write(f"{href}\n")
-    
-    def get_blocks(self):
-        """_summary_
-
-        Returns:
-            _type_: _description_
-        """
-        return self.driver.find_elements(by="xpath", value="//a[contains(@class, 'e13098a59f')]")
-    
-    def obtain_pages(self):
-        """_summary_
-
-        Returns:
-            _type_: _description_
-        """
-        start = int(self.driver.find_element(by="xpath", value="//li[contains(@class, 'f32a99c8d1 ebd02eda9e')]").text)
-        end = int(self.driver.find_elements(by="xpath", value="//li[contains(@class, 'f32a99c8d1')]")[-1].text)
-        return start, end
-    
-    def next_page(self):
-        """_summary_
-        """
-        self.driver.find_element(by = "xpath", value = "//*[contains(@aria-label, 'Next page')]").click()
         
     def main(self):
-        """_summary_
         """
-        self.search_listings(self.checkin, self.checkout, self.city, self.country, self.adults, self.children, self.rooms)
+        General function that comprehends the process of all the actions performed by this class and finally closes the
+        selenium driver instantiated for doing so.
+        
+        Returns:
+            None
+        """
+        self.search_listings(self.checkin, self.checkout, self.city, self.adults, self.children, self.rooms)
         try:
             wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
             self.driver.find_element(By.ID, "onetrust-accept-btn-handler").click()
