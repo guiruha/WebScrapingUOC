@@ -8,6 +8,7 @@ if __name__ == "__main__":
                             adults=sys.argv[4], 
                             children=sys.argv[5], 
                             rooms=sys.argv[6])
+
     booking.main()
     
     

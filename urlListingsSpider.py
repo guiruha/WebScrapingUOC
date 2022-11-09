@@ -58,6 +58,7 @@ class UrlSpider(object):
         driver.maximize_window() # For maximizing window 
         driver.implicitly_wait(10)
         try:
+            #Accept cookies
             wait = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
             driver.find_element(By.ID, "onetrust-accept-btn-handler").click()
         except:
@@ -65,6 +66,20 @@ class UrlSpider(object):
                 wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'ss')))
             except:
                 wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, '__bui-c3765876-1')))
+
+
+
+        try:
+            # Click on the language button
+            driver.find_elements(by="xpath", value='//button[@data-modal-id="language-selection"]')[0].click()
+
+            # Change language
+            driver.find_elements(by="xpath", value='//a[@class="bui-list-item bui-list-item--size-small " and @data-lang="en-gb"]')[0].click()
+
+
+        except:
+            print("Language cannot be changed")
+
 
         print("Driver prepared\n\n")
         
@@ -168,7 +183,31 @@ class UrlSpider(object):
                         sub_button_2[1].click()
                         sl_num -= 1
                 finished = True
-    
+
+
+    def set_month_year_initial_web(self, day, month, year):
+        """
+
+
+        :param month:
+        :param year:
+        :return:
+        """
+
+        #Get the check-in and check-out buttons
+        try:
+            check_in = self.driver.find_element(by="xpath", value="//*[contains(@class, 'sb-date-field__icon sb-date-field__icon-btn bk-svg-wrapper calendar-restructure-sb')]")
+            check_in.click()
+            print("Yeah")
+
+            #if
+            #next_month_but = self.driver.find_element(by="xpath", value="//*[contains(@class, 'bui-calendar__control bui-calendar__control--next')]")
+
+        except:
+            print("Exception")
+
+
+
     def set_month_year(self, month, year):
         """
         Navigates through the calendar of Booking.com so as to select the correct month and year of checking and checkout, that is to say,
