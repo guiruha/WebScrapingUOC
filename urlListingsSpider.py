@@ -347,19 +347,31 @@ class UrlSpider(object):
                     href = block.get_attribute("href")
                     f.write(f"{href}\n")
 
+    def open_hotel(self, hotel):
 
-    def get_hotel_data(self):
+        #Click on the hotel link
+        hotel.click()
+        #self.driver.find_element(by="xpath", value='//div[@class="fcab3ed991 a23c043802"]').click()
 
-        original_window = self.driver.current_window_handle
-
-        self.driver.find_element(by = "xpath", value = '//div[@class="fcab3ed991 a23c043802"]').click()
-
-        #Wait until the window opens
+        #Wait for the tab to open
         wait = WebDriverWait(self.driver, 10).until(EC.number_of_windows_to_be(2))
 
+        #Switch tabs
         tabs = self.driver.window_handles
-
         self.driver.switch_to.window(tabs[1])
+
+        return tabs
+
+    def close_hotel(self, tabs):
+
+        #Close current tab
+        self.driver.close()
+
+        #Return to the main tab
+        self.driver.switch_to.window(tabs[0])
+
+
+    def get_hotel_data(self):
 
         hotel_name = self.driver.find_element(by="xpath", value='//h2[@class="d2fee87262 pp-header__title"]').text
         hotel_address = self.driver.find_element(by="xpath", value='//*[contains(@class, "hp_address_subtitle")]').text
@@ -371,6 +383,13 @@ class UrlSpider(object):
         #class "js-rt-block-row e2e-hprt-table-row hprt-table-cheapest-block hprt-table-cheapest-block-fix js-hprt-table-cheapest-block "
         #Es cada linea de la tabla
         room_type = self.driver.find_element(by="xpath", value='//span[contains(@class, "hprt-roomtype-icon-link ")]').text
+
+        rooms = self.driver.find_elements(by="xpath", value='//tr[contains(@class, "js-rt-block-row e2e-hprt-table-row ")]')
+
+        #Iterate through the different
+        #for room in rooms:
+            #print(room.get_attribute("data-block-id"))
+
 
         #Loop inside of room
         #Room capacity counts the person icon representing the capacity of the room
@@ -388,9 +407,6 @@ class UrlSpider(object):
         print(room_capacity)
         time.sleep(2)
 
-        self.driver.close()
-        self.driver.switch_to.window(tabs[0])
-
 
     def main(self):
         """
@@ -407,13 +423,20 @@ class UrlSpider(object):
         except:
             pass
 
-        self.get_hotel_data()
-        time.sleep(2)
-
         current_page, end_page = self.obtain_pages()
-        """while current_page <= end_page:
-            self.save_links(current_page)
+        while current_page <= end_page:
+            #self.save_links(current_page)
+            hotels = self.get_blocks()
+
+            for hotel in hotels[0:2]:
+                tabs = self.open_hotel(hotel)
+                self.get_hotel_data()
+                self.close_hotel(tabs)
+                time.sleep(2)
+
             self.next_page()
             current_page += 1
-            time.sleep(10)"""
+            time.sleep(10)
+
+
         self.driver.close()

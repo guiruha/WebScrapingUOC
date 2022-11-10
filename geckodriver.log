@@ -1763,3 +1763,304 @@ JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/51d017a
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
 console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
 1668066667977	Marionette	INFO	Stopped listening on port 53196
+1668103689034	geckodriver	INFO	Listening on 127.0.0.1:52913
+1668103689459	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "52914" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileZbxcS7"
+1668103689815	Marionette	INFO	Marionette enabled
+2022-11-10 19:08:09.820 plugin-container[45286:3173998] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:08:09.820 plugin-container[45286:3173998] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668103689845	Marionette	INFO	Listening on port 52923
+Read port: 52923
+2022-11-10 19:08:09.919 plugin-container[45286:3173998] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:08:09.919 plugin-container[45286:3173998] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:08:09.919 plugin-container[45286:3174031] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:08:09.919 plugin-container[45286:3174031] nil host used in call to allowsAnyHTTPSCertificateForHost:
+WebDriver BiDi listening on ws://127.0.0.1:52914
+1668103689976	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileZbxcS7/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:52914/devtools/browser/8f153af5-9e44-480d-a9d9-42241ad54e92
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+1668103788474	Marionette	INFO	Stopped listening on port 63824
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1668103793215	Marionette	INFO	Stopped listening on port 49976
+1668103795564	Marionette	INFO	Stopped listening on port 52923
+1668103800398	geckodriver	INFO	Listening on 127.0.0.1:53755
+1668103800827	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "53756" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileiSKzKB"
+1668103801087	Marionette	INFO	Marionette enabled
+1668103801103	Marionette	INFO	Listening on port 53764
+2022-11-10 19:10:01.104 plugin-container[45325:3175803] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:10:01.104 plugin-container[45325:3175803] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:10:01.107 plugin-container[45325:3175803] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:10:01.107 plugin-container[45325:3175803] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:10:01.107 plugin-container[45325:3175801] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:10:01.107 plugin-container[45325:3175801] nil host used in call to allowsAnyHTTPSCertificateForHost:
+Read port: 53764
+WebDriver BiDi listening on ws://127.0.0.1:53756
+1668103801205	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileiSKzKB/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:53756/devtools/browser/245fd66e-a9fb-4521-96c2-0bb33191d60e
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+1668103846008	Marionette	INFO	Stopped listening on port 53764
+1668104127192	geckodriver	INFO	Listening on 127.0.0.1:55153
+1668104127628	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "55154" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilewc0OoA"
+1668104127923	Marionette	INFO	Marionette enabled
+2022-11-10 19:15:27.944 plugin-container[45388:3180772] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:15:27.945 plugin-container[45388:3180772] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668104127946	Marionette	INFO	Listening on port 55162
+2022-11-10 19:15:27.966 plugin-container[45388:3180772] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:15:27.966 plugin-container[45388:3180772] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:15:27.966 plugin-container[45388:3180803] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:15:27.966 plugin-container[45388:3180803] nil host used in call to allowsAnyHTTPSCertificateForHost:
+WebDriver BiDi listening on ws://127.0.0.1:55154
+Read port: 55162
+1668104128116	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilewc0OoA/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:55154/devtools/browser/3f91f5dc-ec61-4d80-9553-dcc4c943a4cf
+1668104157949	Marionette	INFO	Stopped listening on port 55162
+1668104159986	geckodriver::marionette	ERROR	Failed to close browser connection: Socket is not connected (os error 57)
+1668104162586	geckodriver	INFO	Listening on 127.0.0.1:55722
+1668104163019	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "55723" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilex0B691"
+1668104163308	Marionette	INFO	Marionette enabled
+2022-11-10 19:16:03.330 plugin-container[45416:3181720] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:16:03.330 plugin-container[45416:3181720] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:16:03.333 plugin-container[45416:3181720] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:16:03.333 plugin-container[45416:3181720] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:16:03.333 plugin-container[45416:3181718] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:16:03.333 plugin-container[45416:3181718] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668104163334	Marionette	INFO	Listening on port 55734
+WebDriver BiDi listening on ws://127.0.0.1:55723
+Read port: 55734
+1668104163515	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilex0B691/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:55723/devtools/browser/232c4e76-7d4a-470d-8a73-196b4f330203
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+1668104208251	Marionette	INFO	Stopped listening on port 55734
+1668104648119	geckodriver	INFO	Listening on 127.0.0.1:57387
+1668104648530	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "57388" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofile9oasNv"
+1668104648881	Marionette	INFO	Marionette enabled
+2022-11-10 19:24:08.903 plugin-container[45521:3191199] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:24:08.903 plugin-container[45521:3191199] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668104648910	Marionette	INFO	Listening on port 57397
+Read port: 57397
+2022-11-10 19:24:08.989 plugin-container[45521:3191199] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:24:08.989 plugin-container[45521:3191199] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:24:08.989 plugin-container[45521:3191235] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:24:08.989 plugin-container[45521:3191235] nil host used in call to allowsAnyHTTPSCertificateForHost:
+WebDriver BiDi listening on ws://127.0.0.1:57388
+1668104649033	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofile9oasNv/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:57388/devtools/browser/1933a208-2d9a-4676-b9df-8f3728e393b6
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+1668104750436	geckodriver	INFO	Listening on 127.0.0.1:58209
+1668104750871	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "58210" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileRTab88"
+1668104751149	Marionette	INFO	Marionette enabled
+2022-11-10 19:25:51.167 plugin-container[45572:3193580] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:25:51.171 plugin-container[45572:3193580] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:25:51.183 plugin-container[45572:3193580] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:25:51.183 plugin-container[45572:3193580] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:25:51.183 plugin-container[45572:3193585] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:25:51.183 plugin-container[45572:3193585] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668104751276	Marionette	INFO	Listening on port 58219
+WebDriver BiDi listening on ws://127.0.0.1:58210
+Read port: 58219
+1668104751474	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileRTab88/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58210/devtools/browser/ade9e1e1-a298-49b6-a778-d5991791e399
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+1668104815804	geckodriver	INFO	Listening on 127.0.0.1:58959
+1668104816250	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "58960" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileUeyeBd"
+2022-11-10 19:26:56.525 plugin-container[45601:3194488] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:26:56.526 plugin-container[45601:3194488] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668104816529	Marionette	INFO	Marionette enabled
+1668104816562	Marionette	INFO	Listening on port 58970
+2022-11-10 19:26:56.580 plugin-container[45601:3194488] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:26:56.580 plugin-container[45601:3194488] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:26:56.580 plugin-container[45601:3194486] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:26:56.580 plugin-container[45601:3194486] nil host used in call to allowsAnyHTTPSCertificateForHost:
+WebDriver BiDi listening on ws://127.0.0.1:58960
+Read port: 58970
+1668104816767	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileUeyeBd/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58960/devtools/browser/51883070-cb98-47a5-8add-fa980595cd99
+1668104819956	Marionette	INFO	Stopped listening on port 57397
+1668104822278	Marionette	INFO	Stopped listening on port 58219
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+1668104864234	Marionette	INFO	Stopped listening on port 58970
+1668105065045	geckodriver	INFO	Listening on 127.0.0.1:59982
+1668105065489	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "59983" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileCEmQUk"
+2022-11-10 19:31:05.762 plugin-container[45686:3199242] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:31:05.762 plugin-container[45686:3199242] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:31:05.763 plugin-container[45686:3199242] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:31:05.763 plugin-container[45686:3199242] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:31:05.763 plugin-container[45686:3199247] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:31:05.763 plugin-container[45686:3199247] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668105065774	Marionette	INFO	Marionette enabled
+1668105065796	Marionette	INFO	Listening on port 59992
+Read port: 59992
+WebDriver BiDi listening on ws://127.0.0.1:59983
+1668105065898	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileCEmQUk/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:59983/devtools/browser/e65b53dd-dac5-4246-9377-fdef82134daa
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+1668105180764	geckodriver	INFO	Listening on 127.0.0.1:60857
+1668105181203	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "60858" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileyhzOWn"
+2022-11-10 19:33:01.482 plugin-container[45809:3202937] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:33:01.482 plugin-container[45809:3202937] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668105181489	Marionette	INFO	Marionette enabled
+2022-11-10 19:33:01.490 plugin-container[45809:3202937] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:33:01.490 plugin-container[45809:3202937] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:33:01.490 plugin-container[45809:3202934] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:33:01.490 plugin-container[45809:3202934] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668105181517	Marionette	INFO	Listening on port 60867
+WebDriver BiDi listening on ws://127.0.0.1:60858
+Read port: 60867
+1668105181708	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileyhzOWn/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:60858/devtools/browser/fec547c4-faae-4e5a-9d4c-1e99e495f132
+1668105189460	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+1668105212906	Marionette	INFO	Stopped listening on port 59992
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+1668105284832	geckodriver	INFO	Listening on 127.0.0.1:61704
+1668105285274	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "61705" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilecYjdDL"
+2022-11-10 19:34:45.493 plugin-container[45861:3206164] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:34:45.493 plugin-container[45861:3206164] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668105285495	Marionette	INFO	Marionette enabled
+2022-11-10 19:34:45.495 plugin-container[45861:3206164] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:34:45.495 plugin-container[45861:3206164] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:34:45.495 plugin-container[45861:3206162] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:34:45.495 plugin-container[45861:3206162] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668105285527	Marionette	INFO	Listening on port 61714
+Read port: 61714
+WebDriver BiDi listening on ws://127.0.0.1:61705
+1668105285712	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilecYjdDL/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:61705/devtools/browser/291e72ce-8ed6-4b42-9a91-cfe4233fc250
+Marionette threw an error: TypeError: browsingContext.currentWindowGlobal is null
+getMarionetteCommandsActorProxy/get/<@chrome://remote/content/marionette/actors/MarionetteCommandsParent.jsm:337:29
+
+1668105302108	Marionette	INFO	Stopped listening on port 60867
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1668105304242	Marionette	INFO	Stopped listening on port 61714
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1668105307858	geckodriver	INFO	Listening on 127.0.0.1:61947
+1668105308312	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "61948" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileX3yVyG"
+2022-11-10 19:35:08.562 plugin-container[45896:3206927] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:35:08.563 plugin-container[45896:3206927] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:35:08.565 plugin-container[45896:3206927] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:35:08.565 plugin-container[45896:3206927] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:35:08.565 plugin-container[45896:3206932] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:35:08.565 plugin-container[45896:3206932] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668105308567	Marionette	INFO	Marionette enabled
+1668105308588	Marionette	INFO	Listening on port 61957
+Read port: 61957
+WebDriver BiDi listening on ws://127.0.0.1:61948
+1668105308684	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofileX3yVyG/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:61948/devtools/browser/0c19a085-c70f-4f05-9cae-cd8df2c20fae
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+1668105359999	Marionette	INFO	Stopped listening on port 61957
+1668105400694	geckodriver	INFO	Listening on 127.0.0.1:62759
+1668105401134	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "62760" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilejGrnH7"
+2022-11-10 19:36:41.417 plugin-container[45934:3208928] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:36:41.417 plugin-container[45934:3208928] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:36:41.419 plugin-container[45934:3208928] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:36:41.419 plugin-container[45934:3208928] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:36:41.419 plugin-container[45934:3208930] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:36:41.419 plugin-container[45934:3208930] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668105401428	Marionette	INFO	Marionette enabled
+1668105401457	Marionette	INFO	Listening on port 62768
+WebDriver BiDi listening on ws://127.0.0.1:62760
+Read port: 62768
+1668105401648	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilejGrnH7/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:62760/devtools/browser/88cd708b-9a32-4bbd-83e7-7e194bf9c879
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1668105658229	geckodriver	INFO	Listening on 127.0.0.1:63947
+1668105658672	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "63948" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilevDQ2AK"
+2022-11-10 19:40:58.955 plugin-container[45995:3213745] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:40:58.955 plugin-container[45995:3213745] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:40:58.957 plugin-container[45995:3213745] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:40:58.957 plugin-container[45995:3213745] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-10 19:40:58.957 plugin-container[45995:3213743] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-10 19:40:58.957 plugin-container[45995:3213743] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668105658965	Marionette	INFO	Marionette enabled
+1668105658988	Marionette	INFO	Listening on port 63957
+WebDriver BiDi listening on ws://127.0.0.1:63948
+Read port: 63957
+1668105659170	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilevDQ2AK/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:63948/devtools/browser/87e6a39d-4a49-4646-b3e9-401748995a48
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+1668105763396	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
