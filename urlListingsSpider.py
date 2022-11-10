@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import csv
 import os
 import datetime
 from selenium import webdriver
@@ -33,6 +34,7 @@ class UrlSpider(object):
         self.rooms = int(rooms)
         self.url = "https://www.booking.com"
         self.driver = self.set_selenium_driver(self.url)
+        self.hotels_list = []
             
     def set_selenium_driver(self, url):
         """
@@ -398,14 +400,27 @@ class UrlSpider(object):
         room_price = self.driver.find_element(by="xpath", value='//span[contains(@class, "prco-valign-middle-helper")]').text.split(" ")[1]
         room_options = self.driver.find_element(by="xpath", value='//div[contains(@class, "bui-list__description")]').text
 
-        print(hotel_name)
-        print(hotel_address)
-        print(hotel_features)
-        print(room_type)
-        print(room_price)
-        print(room_options)
-        print(room_capacity)
+        hotel_dict = {}
+
+        hotel_dict["name"] = hotel_name
+        hotel_dict["address"] = hotel_address
+        hotel_dict["features"] = hotel_features
+        hotel_dict["room_type"] = room_type
+        hotel_dict["room_price"] = room_price
+        hotel_dict["room_options"] = room_options
+        hotel_dict["room_capacity"] = room_capacity
+
+        self.hotels_list.append(hotel_dict)
         time.sleep(2)
+
+    def data_to_csv(self):
+
+        keys = self.hotels_list[0].keys()
+
+        with open('hotels_data.csv', 'w', newline='') as output_file:
+            dict_writer = csv.DictWriter(output_file, keys)
+            dict_writer.writeheader()
+            dict_writer.writerows(self.hotels_list)
 
 
     def main(self):
@@ -424,7 +439,7 @@ class UrlSpider(object):
             pass
 
         current_page, end_page = self.obtain_pages()
-        while current_page <= end_page:
+        while current_page <= 2: #end_page:
             #self.save_links(current_page)
             hotels = self.get_blocks()
 
@@ -438,5 +453,6 @@ class UrlSpider(object):
             current_page += 1
             time.sleep(10)
 
+        self.data_to_csv()
 
         self.driver.close()
