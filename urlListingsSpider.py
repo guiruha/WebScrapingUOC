@@ -184,10 +184,8 @@ class UrlSpider(object):
                         sl_num -= 1
                 finished = True
 
-
     def set_month_year_initial_web(self, day, month, year):
         """
-
 
         :param month:
         :param year:
@@ -205,8 +203,6 @@ class UrlSpider(object):
 
         except:
             print("Exception")
-
-
 
     def set_month_year(self, month, year):
         """
@@ -350,7 +346,52 @@ class UrlSpider(object):
                 for block in self.get_blocks():
                     href = block.get_attribute("href")
                     f.write(f"{href}\n")
-        
+
+
+    def get_hotel_data(self):
+
+        original_window = self.driver.current_window_handle
+
+        self.driver.find_element(by = "xpath", value = '//div[@class="fcab3ed991 a23c043802"]').click()
+
+        #Wait until the window opens
+        wait = WebDriverWait(self.driver, 10).until(EC.number_of_windows_to_be(2))
+
+        tabs = self.driver.window_handles
+
+        self.driver.switch_to.window(tabs[1])
+
+        hotel_name = self.driver.find_element(by="xpath", value='//h2[@class="d2fee87262 pp-header__title"]').text
+        hotel_address = self.driver.find_element(by="xpath", value='//*[contains(@class, "hp_address_subtitle")]').text
+
+        #Make it a loop
+        hotel_features = self.driver.find_element(by="xpath", value='//div[contains(@class, "important_facility")]').get_attribute("data-name-en")
+
+        #Make it a loop
+        #class "js-rt-block-row e2e-hprt-table-row hprt-table-cheapest-block hprt-table-cheapest-block-fix js-hprt-table-cheapest-block "
+        #Es cada linea de la tabla
+        room_type = self.driver.find_element(by="xpath", value='//span[contains(@class, "hprt-roomtype-icon-link ")]').text
+
+        #Loop inside of room
+        #Room capacity counts the person icon representing the capacity of the room
+        room_capacity_list = self.driver.find_elements(by="xpath", value='//span[contains(@class, "c-occupancy-icons__adults")]/i[@class="bicon bicon-occupancy"]')
+        room_capacity = len(room_capacity_list)
+        room_price = self.driver.find_element(by="xpath", value='//span[contains(@class, "prco-valign-middle-helper")]').text.split(" ")[1]
+        room_options = self.driver.find_element(by="xpath", value='//div[contains(@class, "bui-list__description")]').text
+
+        print(hotel_name)
+        print(hotel_address)
+        print(hotel_features)
+        print(room_type)
+        print(room_price)
+        print(room_options)
+        print(room_capacity)
+        time.sleep(2)
+
+        self.driver.close()
+        self.driver.switch_to.window(tabs[0])
+
+
     def main(self):
         """
         General function that comprehends the process of all the actions performed by this class and finally closes the
@@ -365,10 +406,14 @@ class UrlSpider(object):
             self.driver.find_element(By.ID, "onetrust-accept-btn-handler").click()
         except:
             pass
+
+        self.get_hotel_data()
+        time.sleep(2)
+
         current_page, end_page = self.obtain_pages()
-        while current_page <= end_page:
+        """while current_page <= end_page:
             self.save_links(current_page)
             self.next_page()
             current_page += 1
-            time.sleep(10)
+            time.sleep(10)"""
         self.driver.close()
