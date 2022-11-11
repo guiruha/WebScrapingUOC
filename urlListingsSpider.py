@@ -1,6 +1,7 @@
 import numpy as np
 import time
 import csv
+from collections import defaultdict
 import os
 import datetime
 from selenium import webdriver
@@ -58,7 +59,7 @@ class UrlSpider(object):
         driver.get(url)
         time.sleep(2)
         driver.maximize_window() # For maximizing window 
-        driver.implicitly_wait(10)
+        driver.implicitly_wait(2)
         try:
             #Accept cookies
             wait = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
@@ -377,38 +378,50 @@ class UrlSpider(object):
 
         hotel_name = self.driver.find_element(by="xpath", value='//h2[@class="d2fee87262 pp-header__title"]').text
         hotel_address = self.driver.find_element(by="xpath", value='//*[contains(@class, "hp_address_subtitle")]').text
+        hotel_score = self.driver.find_element(by="xpath", value='//div[@class="b5cd09854e d10a6220b4"]').text
 
-        #Make it a loop
-        hotel_features = self.driver.find_element(by="xpath", value='//div[contains(@class, "important_facility")]').get_attribute("data-name-en")
+        #Hotel features
+        hotel_features = []
+        hotel_all_features = self.driver.find_elements(by="xpath", value='//div[@class="db29ecfbe2 c21a2f2d97 fe87d598e8"]')
+        for feature in hotel_all_features:
+            hotel_features.append(feature.text)
 
-        #Make it a loop
-        #class "js-rt-block-row e2e-hprt-table-row hprt-table-cheapest-block hprt-table-cheapest-block-fix js-hprt-table-cheapest-block "
-        #Es cada linea de la tabla
-        room_type = self.driver.find_element(by="xpath", value='//span[contains(@class, "hprt-roomtype-icon-link ")]').text
+        #Rooms
+        rooms = self.driver.find_elements(by="xpath", value='//table[contains(@class, "hprt-table")]//tr[contains(@class, "js-rt-block-row e2e-hprt-table-row ")]')
+        print("Rooms")
+        print(rooms)
 
-        rooms = self.driver.find_elements(by="xpath", value='//tr[contains(@class, "js-rt-block-row e2e-hprt-table-row ")]')
+        rooms_data = {}
 
-        #Iterate through the different
-        #for room in rooms:
-            #print(room.get_attribute("data-block-id"))
+        for room in rooms:
+            print("Room")
+            id = room.get_attribute("data-block-id")
+            rooms_data[id] = {}
 
+            room_price = self.driver.find_element(by="xpath",
+                                                  value='//tr[contains(@data-block-id, "{}")]//span[contains(@class, "prco-valign-middle-helper")]'.format(id)).text
+            room_capacity = self.driver.find_element(by="xpath",
+                                                  value='//tr[contains(@data-block-id, "{}")]//span[contains(@class, "bui-u-sr-only")]'.format(id)).text
 
-        #Loop inside of room
-        #Room capacity counts the person icon representing the capacity of the room
-        room_capacity_list = self.driver.find_elements(by="xpath", value='//span[contains(@class, "c-occupancy-icons__adults")]/i[@class="bicon bicon-occupancy"]')
-        room_capacity = len(room_capacity_list)
-        room_price = self.driver.find_element(by="xpath", value='//span[contains(@class, "prco-valign-middle-helper")]').text.split(" ")[1]
-        room_options = self.driver.find_element(by="xpath", value='//div[contains(@class, "bui-list__description")]').text
+            room_options_all_objects = self.driver.find_elements(by="xpath",
+                                                     value='//tr[contains(@data-block-id, "{}")]//td[contains(@class, " hprt-table-cell hprt-table-cell-conditions ")]//div[contains(@class, "bui-list__description")]'.format(
+                                                         id))
+            room_options = []
+
+            for room_option in room_options_all_objects:
+                room_options.append(room_option.text)
+
+            rooms_data[id]["room_price"] = room_price
+            rooms_data[id]["room_capacity"] = room_capacity
+            rooms_data[id]["room_options"] = room_options
 
         hotel_dict = {}
 
         hotel_dict["name"] = hotel_name
         hotel_dict["address"] = hotel_address
         hotel_dict["features"] = hotel_features
-        hotel_dict["room_type"] = room_type
-        hotel_dict["room_price"] = room_price
-        hotel_dict["room_options"] = room_options
-        hotel_dict["room_capacity"] = room_capacity
+        hotel_dict["room_data"] = rooms_data
+        hotel_dict["hotel_score"] = hotel_score
 
         self.hotels_list.append(hotel_dict)
         time.sleep(2)
@@ -437,6 +450,13 @@ class UrlSpider(object):
             self.driver.find_element(By.ID, "onetrust-accept-btn-handler").click()
         except:
             pass
+
+        """hotel = self.get_blocks()[0]
+        tabs = self.open_hotel(hotel)
+        self.get_hotel_data()
+        self.close_hotel(tabs)
+        time.sleep(2)"""
+
 
         current_page, end_page = self.obtain_pages()
         while current_page <= 2: #end_page:
