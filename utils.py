@@ -2,16 +2,12 @@ import datetime
 import sys
 
 
-def generate_url(checkin, checkout, city, country, adults, children, rooms):
-
-    # Create url
-    url = "https://www.booking.com/searchresults.es.html?ss={city}&dest_type=city&checkin={checkin}&checkout={checkout}&group_adults={adults}"\
-        "&group_children={children}&order=price&ss={city}%2C%20{country}&no_rooms={rooms}"\
-        .format(checkin = checkin,
-                checkout = checkout,
-                adults = int(adults),
-                children = int(children),
-                city=city,
-                country=country,
-                rooms = rooms)
-    return url
+def change_language(date):
+    month_dict = {"Enero": "January", "Febrero": "February", "Abril": "April", "Marzo": "March",
+                  "Mayo": "May", "Junio": "June", "Julio": "July", "Agosto": "August", "Septiembre": "September",
+                  "Octubre": "October", "Noviembre": "November", "Diciembre": "December"}
+    date_list = date.split("-")
+    if date_list[1] in month_dict.values:
+        return date
+    month = month_dict[date_list[1]]
+    return "-".join([date_list[0], month, date_list[2]])

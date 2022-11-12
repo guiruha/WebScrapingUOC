@@ -1,9 +1,12 @@
+# IMPORTING NECESSARY LIBRARIES
 import numpy as np
 import time
 import csv
 from collections import defaultdict
 import os
 import datetime
+import random
+import urllib
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -27,6 +30,7 @@ class UrlSpider(object):
         Returns: 
             None
         """
+        # Attributes used thoughout the script
         self.checkin = checkin
         self.checkout = checkout
         self.city = city
@@ -47,44 +51,46 @@ class UrlSpider(object):
         Returns
             driver: fully prepared selenium driver for scraping
         """
-        print("\nPreparing Web Driver\n\n")
+        print("\n [{}] Preparing Web Driver\n\n".format(str(datetime.datetime.now())[:-7]))
+        # Definition of the user agent in order to avoid possible block from webmaster
         user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0"
        
        
         options = webdriver.firefox.options.Options()
-        # DECOMENT THIS IF YOU DO NOT WANT TO SEE THE SEARCHING PROCESS IN THE BROWSER
+        # DECOMENT THIS LINE BELOW IF YOU DO NOT WANT TO SEE THE SEARCHING PROCESS IN THE BROWSER
         #options.headless = True
+        # Adding user agent to the options of the Firefox webdriver. In this case we uso the GeckoDriverManager
+        # which is installed in case the user running this script does not have it installed.
         options.add_argument(f"user-agent={user_agent}")
         driver = webdriver.Firefox(service=webdriver.firefox.service.Service(GeckoDriverManager().install()), options=options)
         driver.get(url)
         time.sleep(2)
-        driver.maximize_window() # For maximizing window 
+        # For maximizing window in case we are not using the headless mode
+        driver.maximize_window()
         driver.implicitly_wait(2)
         try:
-            #Accept cookies
+            #Wait until warning appears and ccept cookies
             wait = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
             driver.find_element(By.ID, "onetrust-accept-btn-handler").click()
+        # IN case the cookies policy button is not found the script waits until it can introduce the search criteria in the web page searcher
+        # In particular id "ss" references the place where the name of the city is introduced.
         except:
             try:
                 wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'ss')))
             except:
                 wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, '__bui-c3765876-1')))
-
-
-
+        
         try:
             # Click on the language button
             driver.find_elements(by="xpath", value='//button[@data-modal-id="language-selection"]')[0].click()
 
             # Change language
-            driver.find_elements(by="xpath", value='//a[@class="bui-list-item bui-list-item--size-small " and @data-lang="en-gb"]')[0].click()
-
+            driver.find_elements(by="xpath", value='//a[@class="bui-list-item bui-list-item--size-small " and @data-lang="en-us"]')[0].click()
 
         except:
-            print("Language cannot be changed")
+            driver.find_elements(by="xpath", value='//a[@data-lang="en-us"]')[0].click()
 
-
-        print("Driver prepared\n\n")
+        print("\n [{}] Driver prepared\n\n".format(str(datetime.datetime.now())[:-7]))
         
         return driver
     
@@ -102,6 +108,10 @@ class UrlSpider(object):
             c_children (int): number of children found by default in the search grid
             c_rooms (int): number of rooms found by default in the search grid
         """
+        # As Booking.com use different web configuration (we believe they are used for A/B testing), everytime you connect
+        # with an scrapper in the web page you land randomly in one of the two options we have encountered. Therefore, we
+        # take different approach to introduce the search criteria and crawl throuigh the web. The option which xpaths are
+        # intellegible has been baptized as "normal_search", and the alternative web is "non_normal search".
         if self.driver.find_elements(by="xpath", value='//*[@data-adults-count=""]') != []:
             normal_search = True
             c_adults = self.driver.find_element(by="xpath", value='//*[@data-adults-count=""]').text.split(" ")[0]
@@ -127,6 +137,8 @@ class UrlSpider(object):
             None
         """
         search_params = [self.adults, self.children, self.rooms]
+        # As it is presented in the comments of the function above, the approach we take when crawling the Booking landing page depends on the type of 
+        # web we land in. The normal_search variable (obtained from the previous function)  indicates whether the landing page is "normal" or not
         if normal_search:
             try:
                 add = self.driver.find_elements(by = "xpath", value = '//*[contains(@class, "bui-button bui-button--secondary bui-stepper__add-button ")]')
@@ -151,7 +163,6 @@ class UrlSpider(object):
             add_buttons = self.driver.find_elements(by="xpath", value='//*[@class="fc63351294 a822bdf511 e3c025e003 fa565176a8 f7db01295e e1b7cfea84 d64a4ea64d"]')
             sub_button_1 = self.driver.find_elements(by="xpath", value='//*[@class="fc63351294 a822bdf511 e3c025e003 fa565176a8 f7db01295e e1b7cfea84 cd7aa7c891"]')
             sub_button_2 = self.driver.find_elements(by="xpath", value='//*[@class="fc63351294 a822bdf511 e3c025e003 fa565176a8 f7db01295e cd7aa7c891"]')
-            print(len(add_buttons), len(sub_button_1), len(sub_button_2))
             finished = False
             while finished == False:
                 ## ADULTS
@@ -187,26 +198,6 @@ class UrlSpider(object):
                         sl_num -= 1
                 finished = True
 
-    def set_month_year_initial_web(self, day, month, year):
-        """
-
-        :param month:
-        :param year:
-        :return:
-        """
-
-        #Get the check-in and check-out buttons
-        try:
-            check_in = self.driver.find_element(by="xpath", value="//*[contains(@class, 'sb-date-field__icon sb-date-field__icon-btn bk-svg-wrapper calendar-restructure-sb')]")
-            check_in.click()
-            print("Yeah")
-
-            #if
-            #next_month_but = self.driver.find_element(by="xpath", value="//*[contains(@class, 'bui-calendar__control bui-calendar__control--next')]")
-
-        except:
-            print("Exception")
-
     def set_month_year(self, month, year):
         """
         Navigates through the calendar of Booking.com so as to select the correct month and year of checking and checkout, that is to say,
@@ -219,17 +210,20 @@ class UrlSpider(object):
         Returns:
             None
         """
-        is_good_month_shows = False
-        while is_good_month_shows != True:
+        inputed_month = False
+        while inputed_month != True:
             time.sleep(2)
-            current_date = self.driver.find_element(by="xpath", value="//*[contains(@aria-live, 'polite')]").text
+            try:
+                current_date = self.driver.find_element(by="xpath", value="//*[contains(@aria-live, 'polite')]").text
+            except:
+                current_date = self.driver.find_element(by = "xpath", value = "//*[contains(@class, 'ac78a73c96 ab0d1629e5')]").text
             if len(current_date) == 0:
                 current_date = self.driver.find_element(by="xpath", value="//*[contains(@class, 'bui-calendar__wrapper')]")
                 current_date = current_date.text.split(" ")[0:2]
-                current_date[1] = str(''.join(i for i in current_date[1] if i.isdigit()))
+                current_date[1] = str(''.join(d for d in current_date[1] if d.isdigit()))
 
             if month in current_date and year in current_date:
-                is_good_month_shows = True
+                inputed_month = True
             else:
                 try:
                     self.driver.find_element(by="xpath", value="//button[contains(@class, 'c9fa5fc96d be298b15fa')]").click()
@@ -277,6 +271,9 @@ class UrlSpider(object):
             children (int): number of children
             rooms (int): number of rooms
         """
+        
+        print("\n [{}] Inputing search criteria\n\n".format(str(datetime.datetime.now())[:-7]))
+        
         try:
             self.driver.find_element(by = "xpath", value='//*[@id="ss"]').send_keys(city)
         except:
@@ -290,13 +287,22 @@ class UrlSpider(object):
         
         self.introduce_selection_numbers(normal_search, [c_adults, c_children, c_rooms])
         
+        print("\n [{}] Moving to the listings page\n\n".format(str(datetime.datetime.now())[:-7]))
+        
         try:
             self.driver.find_element(by = "xpath", value = "//*[contains(@class, 'sb-searchbox__button ')]").click()
         except:
             self.driver.find_element(by = "xpath", value = "//*[contains(@type, 'submit')]").click()
-
-        self.set_date(self.checkin, self.checkout)
-        time.sleep(2)
+        try:
+            self.set_date(self.checkin, self.checkout)
+            time.sleep(2)
+        except:
+            try:
+                self.driver.find_element(by = "xpath", value = "//*[contains(@class, 'd47738b911 fb1847d86a')]").click()
+                self.set_date(self.checkin, self.checkout)
+            except:
+                self.driver.find_element(by = "xpath", value = "//*[contains(@data-testid, 'date-display-field-start')]").click()
+                self.set_date(self.checkin, self.checkout)
         
         button = f"//*[contains(@class, 'fc63351294 a822bdf511 d4b6b7a9e7 f7db01295e af18dbd5a4 f4605622ad c827b27356')]"
         self.driver.find_element(by="xpath", value=button).click()
@@ -374,14 +380,27 @@ class UrlSpider(object):
         self.driver.switch_to.window(tabs[0])
 
 
-    def get_hotel_data(self):
+    def get_hotel_data(self, count):
         #Hotel main attributes
         try:
-            hotel_name = self.driver.find_element(by="xpath", value='//h2[@class="d2fee87262 pp-header__title"]').text
+            hotel_name = self.driver.find_element(by="xpath", value="//h2[contains(@class, ' pp-header__title']").text
         except:
-            hotel_name = "NA"
-        hotel_address = self.driver.find_element(by="xpath", value='//*[contains(@class, "hp_address_subtitle")]').text
-        hotel_score = self.driver.find_element(by="xpath", value='//div[@class="b5cd09854e d10a6220b4"]').text
+            try:
+                hotel_name = self.driver.find_element(by = "xpath", value = "//h2[contains(@class, 'd2fee87262 pp-header__title')]").text
+            except:
+                hotel_name = f"Unkown{count}"
+                
+        try:
+            hotel_address = self.driver.find_element(by="xpath", value='//*[contains(@class, "hp_address_subtitle")]').text
+        except:
+            try:
+                hotel_address = self.driver.find_element(by = "xpath", value = "//*[contains(@class, 'hp_address_subtitle js-hp_address_subtitle jq_tooltip')]").text
+            except:
+                hotel_address = self.driver.find_element(by = "xpath", value = "//*[contains(@data-node_tt_id, 'location_score_tooltip')]").text
+        try:    
+            hotel_score = self.driver.find_element(by="xpath", value='//*[@class="b5cd09854e d10a6220b4"]').text
+        except:
+            hotel_score = -1
 
         #Hotel features
         hotel_features = []
@@ -416,14 +435,18 @@ class UrlSpider(object):
             rooms_data[room_id]["room_options"] = room_options
 
         #Store the score of the hotel for the different categories
-        score_box = self.driver.find_element(by="xpath", value='//div[@class="bui-spacer--larger"]//div[@class="d46673fe81"]')
-        scores = score_box.find_elements(by="xpath", value='//div[@class="ee746850b6 b8eef6afe1"]')
-        score_names = score_box.find_elements(by="xpath", value='//span[@class="d6d4671780"]')
+        try:
+            score_box = self.driver.find_element(by="xpath", value='//div[@class="bui-spacer--larger"]//div[@class="d46673fe81"]')
+            scores = score_box.find_elements(by="xpath", value='//div[@class="ee746850b6 b8eef6afe1"]')
+            score_names = score_box.find_elements(by="xpath", value='//span[@class="d6d4671780"]')
+        
+            hotel_scores = {}
 
-        hotel_scores = {}
-
-        for i in range(len(scores)):
-            hotel_scores[score_names[i].text] = scores[i].text
+            for i in range(len(scores)):
+                hotel_scores[score_names[i].text] = scores[i].text
+        
+        except:
+            hotel_scores = {"Empty": "No Data"}
 
         #Create a dictionary to store all the different features extracted
         hotel_dict = {}
@@ -439,7 +462,31 @@ class UrlSpider(object):
 
         self.hotels_list.append(hotel_dict)
         time.sleep(2)
+        self.save_photos_random(2, hotel_address)
 
+    def save_photos_random(self, num_photos, hotel_address):
+        """_summary_
+
+        Args:
+            num_photos (_type_): _description_
+        """
+        save_path = f"hotel_images/{hotel_address}"
+        try:
+            os.makedirs(save_path)
+        except:
+            print("Directory already exists")
+            pass
+        self.driver.find_element(by = "xpath", value = "//a[contains(@class,'bh-photo-grid-item bh-photo-grid-thumb js-bh-photo-grid-item-see-all')]").click()
+        photos = self.driver.find_elements(by = "xpath", value = "//img[contains(@class, 'bh-photo-modal-grid-image')]")
+        photos_clean = [x for x in photos if x.get_attribute('src') != None]
+        if len(photos_clean) == 0:
+            return None
+        for num in range(num_photos):
+            index = random.randint(0, len(photos_clean)-1)
+            src = photos[index].get_attribute('src')
+            print(f"image_{num}.png")
+            urllib.request.urlretrieve(src, "/".join([save_path, f"image_{num}.png"]))
+            
     def data_to_csv(self):
 
         keys = self.hotels_list[0].keys()
@@ -458,6 +505,7 @@ class UrlSpider(object):
         Returns:
             None
         """
+        count = 0
         self.search_listings(self.checkin, self.checkout, self.city, self.adults, self.children, self.rooms)
         try:
             wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
@@ -473,18 +521,24 @@ class UrlSpider(object):
 
 
         current_page, end_page = self.obtain_pages()
-        while current_page <= 2: #end_page:
+        while current_page <= 10: #end_page:
             #self.save_links(current_page)
             hotels = self.get_blocks()
 
-            for hotel in hotels[0:2]:
+            for hotel in hotels:
+                print(hotel.get_attribute('href'))
+                print("\n [{}] Retrieving info from hotel {}\n\n".format(str(datetime.datetime.now())[:-7],count))
                 tabs = self.open_hotel(hotel)
-                self.get_hotel_data()
+                self.get_hotel_data(count)
                 self.close_hotel(tabs)
+                count += 1
+                if count > 20:
+                    break 
                 time.sleep(2)
 
             self.next_page()
             current_page += 1
+            print("\n [{}] Moving to page {}\n\n".format(str(datetime.datetime.now())[:-7], current_page))
             time.sleep(10)
 
         self.data_to_csv()
