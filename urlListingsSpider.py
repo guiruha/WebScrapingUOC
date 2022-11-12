@@ -375,8 +375,11 @@ class UrlSpider(object):
 
 
     def get_hotel_data(self):
-
-        hotel_name = self.driver.find_element(by="xpath", value='//h2[@class="d2fee87262 pp-header__title"]').text
+        #Hotel main attributes
+        try:
+            hotel_name = self.driver.find_element(by="xpath", value='//h2[@class="d2fee87262 pp-header__title"]').text
+        except:
+            hotel_name = "NA"
         hotel_address = self.driver.find_element(by="xpath", value='//*[contains(@class, "hp_address_subtitle")]').text
         hotel_score = self.driver.find_element(by="xpath", value='//div[@class="b5cd09854e d10a6220b4"]').text
 
@@ -386,42 +389,42 @@ class UrlSpider(object):
         for feature in hotel_all_features:
             hotel_features.append(feature.text)
 
-        #Rooms
-        rooms = self.driver.find_elements(by="xpath", value='//table[contains(@class, "hprt-table")]//tr[contains(@class, "js-rt-block-row e2e-hprt-table-row ")]')
-        print("Rooms")
-        print(rooms)
+        #Hotel description
+        hotel_description = []
+        hotel_all_description = self.driver.find_elements(by="xpath", value='//div[@id="property_description_content"]//p')
+        for par in hotel_all_description:
+            hotel_description.append(par.text)
 
+        #Different rooms
+        rooms = self.driver.find_elements(by="xpath", value='//table[contains(@class, "hprt-table")]//tr[contains(@class, "js-rt-block-row e2e-hprt-table-row ")]')
         rooms_data = {}
 
         for room in rooms:
-            print("Room")
-            id = room.get_attribute("data-block-id")
-            rooms_data[id] = {}
+            room_id = room.get_attribute("data-block-id")
+            rooms_data[room_id] = {}
 
-            room_price = self.driver.find_element(by="xpath",
-                                                  value='//tr[contains(@data-block-id, "{}")]//span[contains(@class, "prco-valign-middle-helper")]'.format(id)).text
-            room_capacity = self.driver.find_element(by="xpath",
-                                                  value='//tr[contains(@data-block-id, "{}")]//span[contains(@class, "bui-u-sr-only")]'.format(id)).text
+            room_price = self.driver.find_element(by="xpath", value='//tr[contains(@data-block-id, "{}")]//span[contains(@class, "prco-valign-middle-helper")]'.format(room_id)).text
+            room_capacity = self.driver.find_element(by="xpath", value='//tr[contains(@data-block-id, "{}")]//span[contains(@class, "bui-u-sr-only")]'.format(room_id)).text
 
-            room_options_all_objects = self.driver.find_elements(by="xpath",
-                                                     value='//tr[contains(@data-block-id, "{}")]//td[contains(@class, " hprt-table-cell hprt-table-cell-conditions ")]//div[contains(@class, "bui-list__description")]'.format(
-                                                         id))
+            room_options_all_objects = self.driver.find_elements(by="xpath", value='//tr[contains(@data-block-id, "{}")]//td[contains(@class, " hprt-table-cell hprt-table-cell-conditions ")]//div[contains(@class, "bui-list__description")]'.format(room_id))
             room_options = []
-
             for room_option in room_options_all_objects:
                 room_options.append(room_option.text)
 
-            rooms_data[id]["room_price"] = room_price
-            rooms_data[id]["room_capacity"] = room_capacity
-            rooms_data[id]["room_options"] = room_options
+            rooms_data[room_id]["room_price"] = room_price
+            rooms_data[room_id]["room_capacity"] = room_capacity
+            rooms_data[room_id]["room_options"] = room_options
 
+        #Create a dictionary to store all the different features extracted
         hotel_dict = {}
 
         hotel_dict["name"] = hotel_name
         hotel_dict["address"] = hotel_address
+        hotel_dict["hotel_score"] = hotel_score
+        hotel_dict["hotel_description"] = hotel_description
         hotel_dict["features"] = hotel_features
         hotel_dict["room_data"] = rooms_data
-        hotel_dict["hotel_score"] = hotel_score
+
 
         self.hotels_list.append(hotel_dict)
         time.sleep(2)
