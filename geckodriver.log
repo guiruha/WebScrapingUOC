@@ -3515,3 +3515,103 @@ JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
 JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
 JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
 JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+1668242563509	geckodriver	INFO	Listening on 127.0.0.1:58920
+1668242563949	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "58921" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofile4kMHZb"
+2022-11-12 09:42:44.266 plugin-container[57274:3801315] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-12 09:42:44.266 plugin-container[57274:3801315] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668242564271	Marionette	INFO	Marionette enabled
+2022-11-12 09:42:44.294 plugin-container[57274:3801315] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-12 09:42:44.294 plugin-container[57274:3801315] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-12 09:42:44.294 plugin-container[57274:3801342] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-12 09:42:44.294 plugin-container[57274:3801342] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668242564295	Marionette	INFO	Listening on port 58930
+Read port: 58930
+WebDriver BiDi listening on ws://127.0.0.1:58921
+1668242564416	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofile4kMHZb/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58921/devtools/browser/618fd09e-83f3-4561-a868-6fe2b9d5eed7
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+1668242603793	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1668242610925	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1668242621658	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1668242629127	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1668242636319	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1668242646537	Marionette	INFO	Stopped listening on port 58930
+1668242699804	geckodriver	INFO	Listening on 127.0.0.1:59308
+1668242700243	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "59309" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilePzr06h"
+2022-11-12 09:45:00.530 plugin-container[57328:3804026] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-12 09:45:00.531 plugin-container[57328:3804026] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668242700537	Marionette	INFO	Marionette enabled
+2022-11-12 09:45:00.558 plugin-container[57328:3804026] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-12 09:45:00.558 plugin-container[57328:3804026] nil host used in call to allowsAnyHTTPSCertificateForHost:
+2022-11-12 09:45:00.559 plugin-container[57328:3804027] nil host used in call to allowsSpecificHTTPSCertificateForHost
+2022-11-12 09:45:00.559 plugin-container[57328:3804027] nil host used in call to allowsAnyHTTPSCertificateForHost:
+1668242700562	Marionette	INFO	Listening on port 59318
+WebDriver BiDi listening on ws://127.0.0.1:59309
+Read port: 59318
+1668242700721	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilePzr06h/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:59309/devtools/browser/2994c105-61d1-481f-918d-12a20cd2a522
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/51d017a7aa2ba0f5d0d4be476264214fb7d84bb2.js, line 1: unreachable code after return statement
+1668242783310	Marionette	INFO	Stopped listening on port 59318
+console.error: (new TypeError("topBrowsingContext is null", "resource://devtools/server/actors/watcher/browsing-context-helpers.sys.mjs", 387))
+Handler function threw an exception: TypeError: browsingContext.currentWindowGlobal is null
+Stack: isChannelFromSystemPrincipal@resource://devtools/server/actors/network-monitor/utils/network-utils.js:98:1
+exports.createNetworkEvent@resource://devtools/server/actors/network-monitor/utils/network-utils.js:187:33
+_createNetworkEvent@resource://devtools/server/actors/network-monitor/network-observer.js:731:32
+_onRequestHeader@resource://devtools/server/actors/network-monitor/network-observer.js:777:10
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:658:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 98, column: 1
+console.error: (new TypeError("browsingContext.currentWindowGlobal is null", "resource://devtools/server/actors/network-monitor/utils/network-utils.js", 98))
+Handler function threw an exception: TypeError: httpActivity.owner is null
+Stack: _onResponseHeader@resource://devtools/server/actors/network-monitor/network-observer.js:1039:5
+_dispatchActivity@resource://devtools/server/actors/network-monitor/network-observer.js:579:14
+NetworkObserver.prototype.observeActivity<@resource://devtools/server/actors/network-monitor/network-observer.js:688:12
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 1039, column: 5
+console.error: (new TypeError("httpActivity.owner is null", "resource://devtools/server/actors/network-monitor/network-observer.js", 1039))
+Handler function _httpStopRequest threw an exception: TypeError: browsingContext.currentWindowGlobal is null
+Stack: isChannelFromSystemPrincipal@resource://devtools/server/actors/network-monitor/utils/network-utils.js:98:1
+exports.createNetworkEvent@resource://devtools/server/actors/network-monitor/utils/network-utils.js:187:33
+_createNetworkEvent@resource://devtools/server/actors/network-monitor/network-observer.js:731:32
+_httpStopRequest@resource://devtools/server/actors/network-monitor/network-observer.js:365:14
+exports.makeInfallible/<@resource://devtools/shared/ThreadSafeDevToolsUtils.js:103:22
+Line: 98, column: 1
+console.error: (new TypeError("browsingContext.currentWindowGlobal is null", "resource://devtools/server/actors/network-monitor/utils/network-utils.js", 98))
+1668243413113	Marionette	INFO	Stopped listening on port 52630
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1668243415289	Marionette	INFO	Stopped listening on port 49682
+console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+1668243417567	Marionette	INFO	Stopped listening on port 50552

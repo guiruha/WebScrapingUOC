@@ -415,6 +415,16 @@ class UrlSpider(object):
             rooms_data[room_id]["room_capacity"] = room_capacity
             rooms_data[room_id]["room_options"] = room_options
 
+        #Store the score of the hotel for the different categories
+        score_box = self.driver.find_element(by="xpath", value='//div[@class="bui-spacer--larger"]//div[@class="d46673fe81"]')
+        scores = score_box.find_elements(by="xpath", value='//div[@class="ee746850b6 b8eef6afe1"]')
+        score_names = score_box.find_elements(by="xpath", value='//span[@class="d6d4671780"]')
+
+        hotel_scores = {}
+
+        for i in range(len(scores)):
+            hotel_scores[score_names[i].text] = scores[i].text
+
         #Create a dictionary to store all the different features extracted
         hotel_dict = {}
 
@@ -424,6 +434,7 @@ class UrlSpider(object):
         hotel_dict["hotel_description"] = hotel_description
         hotel_dict["features"] = hotel_features
         hotel_dict["room_data"] = rooms_data
+        hotel_dict["hotel_scores"] = hotel_scores
 
 
         self.hotels_list.append(hotel_dict)
