@@ -418,8 +418,33 @@ class UrlSpider(object):
         rooms = self.driver.find_elements(by="xpath", value='//table[contains(@class, "hprt-table")]//tr[contains(@class, "js-rt-block-row e2e-hprt-table-row ")]')
         rooms_data = {}
 
+        # Get the name of the different rooms
+        room_name = self.driver.find_elements(by="xpath", value='//span[@class="hprt-roomtype-icon-link "]')
+        print("Hay {} habitaciones distintas".format(len(room_name)))
+        for name in room_name:
+            print(name.text)
+
+        # Get the main features of the different rooms
+        room_facilities_blocks = self.driver.find_elements(by="xpath", value='//div[@class="hprt-facilities-block"]')
+
+        room_facilities_list = []
+        for room in room_facilities_blocks:
+            all_facilities = room.find_elements(by="xpath", value='.//div[@class="hprt-facilities-facility"]')
+            facilities_list = [fac.text for fac in all_facilities]
+            room_facilities_list.append(facilities_list)
+
+        #Extract each room data
+        room_number = 0
         for room in rooms:
             room_id = room.get_attribute("data-block-id")
+            room_position_table = room.get_attribute("class")
+            room_name_temp = room_name[room_number].text
+            room_facilities = room_facilities_list[room_number]
+
+            # When it is the last row for one room, the room number is changed
+            if "hprt-table-last-row" in room_position_table:
+                room_number += 1
+
             rooms_data[room_id] = {}
 
             room_price = self.driver.find_element(by="xpath", value='//tr[contains(@data-block-id, "{}")]//span[contains(@class, "prco-valign-middle-helper")]'.format(room_id)).text
@@ -430,9 +455,12 @@ class UrlSpider(object):
             for room_option in room_options_all_objects:
                 room_options.append(room_option.text)
 
+            # Add features to the room data dictionary
+            rooms_data[room_id]["room_name"] = room_name_temp
             rooms_data[room_id]["room_price"] = room_price
             rooms_data[room_id]["room_capacity"] = room_capacity
             rooms_data[room_id]["room_options"] = room_options
+            rooms_data[room_id]["room_facilities"] = room_facilities
 
         #Store the score of the hotel for the different categories
         try:
@@ -440,10 +468,7 @@ class UrlSpider(object):
             scores = score_box.find_elements(by="xpath", value='//div[@class="ee746850b6 b8eef6afe1"]')
             score_names = score_box.find_elements(by="xpath", value='//span[@class="d6d4671780"]')
         
-            hotel_scores = {}
-
-            for i in range(len(scores)):
-                hotel_scores[score_names[i].text] = scores[i].text
+            hotel_scores = {score_names[i].text:scores[i].text for i in range(len(scores))}
         
         except:
             hotel_scores = {"Empty": "No Data"}
