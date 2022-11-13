@@ -58,7 +58,7 @@ class UrlSpider(object):
        
         options = webdriver.firefox.options.Options()
         # DECOMENT THIS LINE BELOW IF YOU DO NOT WANT TO SEE THE SEARCHING PROCESS IN THE BROWSER
-        #options.headless = True
+        options.headless = True
         # Adding user agent to the options of the Firefox webdriver. In this case we uso the GeckoDriverManager
         # which is installed in case the user running this script does not have it installed.
         options.add_argument(f"user-agent={user_agent}")
@@ -462,7 +462,8 @@ class UrlSpider(object):
 
         self.hotels_list.append(hotel_dict)
         time.sleep(2)
-        self.save_photos_random(2, hotel_address)
+        if random.randint(1, 100) == 47:
+            self.save_photos_random(2, hotel_address)
 
     def save_photos_random(self, num_photos, hotel_address):
         """_summary_
@@ -485,13 +486,17 @@ class UrlSpider(object):
             index = random.randint(0, len(photos_clean)-1)
             src = photos[index].get_attribute('src')
             print(f"image_{num}.png")
-            urllib.request.urlretrieve(src, "/".join([save_path, f"image_{num}.png"]))
+            try:
+                urllib.request.urlretrieve(src, "/".join([save_path, f"image_{num}.png"]))
+            except:
+                print("An error ocurred with the name of the directory")
+                pass
             
     def data_to_csv(self):
 
         keys = self.hotels_list[0].keys()
 
-        with open('hotels_data.csv', 'w', newline='') as output_file:
+        with open('hotels_data.csv', 'w', newline='\n') as output_file:
             dict_writer = csv.DictWriter(output_file, keys)
             dict_writer.writeheader()
             dict_writer.writerows(self.hotels_list)
@@ -532,15 +537,13 @@ class UrlSpider(object):
                 self.get_hotel_data(count)
                 self.close_hotel(tabs)
                 count += 1
-                if count > 20:
-                    break 
                 time.sleep(2)
+            
+            self.data_to_csv()
 
             self.next_page()
             current_page += 1
             print("\n [{}] Moving to page {}\n\n".format(str(datetime.datetime.now())[:-7], current_page))
             time.sleep(10)
-
-        self.data_to_csv()
 
         self.driver.close()
