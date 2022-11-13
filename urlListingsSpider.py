@@ -58,7 +58,7 @@ class UrlSpider(object):
        
         options = webdriver.firefox.options.Options()
         # DECOMENT THIS LINE BELOW IF YOU DO NOT WANT TO SEE THE SEARCHING PROCESS IN THE BROWSER
-        options.headless = True
+        # options.headless = True
         # Adding user agent to the options of the Firefox webdriver. In this case we uso the GeckoDriverManager
         # which is installed in case the user running this script does not have it installed.
         options.add_argument(f"user-agent={user_agent}")
@@ -216,7 +216,9 @@ class UrlSpider(object):
             try:
                 current_date = self.driver.find_element(by="xpath", value="//*[contains(@aria-live, 'polite')]").text
             except:
-                current_date = self.driver.find_element(by = "xpath", value = "//*[contains(@class, 'ac78a73c96 ab0d1629e5')]").text
+                self.driver.navigate().refresh()
+                time.sleep(5)
+                current_date = self.driver.find_element(by="xpath", value="//*[contains(@aria-live, 'polite')]").text
             if len(current_date) == 0:
                 current_date = self.driver.find_element(by="xpath", value="//*[contains(@class, 'bui-calendar__wrapper')]")
                 current_date = current_date.text.split(" ")[0:2]
@@ -396,7 +398,11 @@ class UrlSpider(object):
             try:
                 hotel_address = self.driver.find_element(by = "xpath", value = "//*[contains(@class, 'hp_address_subtitle js-hp_address_subtitle jq_tooltip')]").text
             except:
-                hotel_address = self.driver.find_element(by = "xpath", value = "//*[contains(@data-node_tt_id, 'location_score_tooltip')]").text
+                try:
+                    hotel_address = self.driver.find_element(by = "xpath", value = "//*[contains(@data-node_tt_id, 'location_score_tooltip')]").text
+                except:
+                    hotel_address = "Unknown{count}"
+        
         try:    
             hotel_score = self.driver.find_element(by="xpath", value='//*[@class="b5cd09854e d10a6220b4"]').text
         except:
@@ -520,11 +526,17 @@ class UrlSpider(object):
     def data_to_csv(self):
 
         keys = self.hotels_list[0].keys()
+        
+        if os.path.isfile('hotels_data.csv'):
+            with open('hotels_data.csv', 'a+', newline='\n') as output_file:
+                dict_writer = csv.DictWriter(output_file, keys)
+                dict_writer.writerows(self.hotels_list)
 
-        with open('hotels_data.csv', 'w', newline='\n') as output_file:
-            dict_writer = csv.DictWriter(output_file, keys)
-            dict_writer.writeheader()
-            dict_writer.writerows(self.hotels_list)
+        else:
+            with open('hotels_data.csv', 'w', newline='\n') as output_file:
+                dict_writer = csv.DictWriter(output_file, keys)
+                dict_writer.writeheader()
+                dict_writer.writerows(self.hotels_list)
 
 
     def main(self):
@@ -536,6 +548,7 @@ class UrlSpider(object):
             None
         """
         count = 0
+        print(self.city)
         self.search_listings(self.checkin, self.checkout, self.city, self.adults, self.children, self.rooms)
         try:
             wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
