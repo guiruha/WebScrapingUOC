@@ -426,9 +426,6 @@ class UrlSpider(object):
 
         # Get the name of the different rooms
         room_name = self.driver.find_elements(by="xpath", value='//span[@class="hprt-roomtype-icon-link "]')
-        print("Hay {} habitaciones distintas".format(len(room_name)))
-        for name in room_name:
-            print(name.text)
 
         # Get the main features of the different rooms
         room_facilities_blocks = self.driver.find_elements(by="xpath", value='//div[@class="hprt-facilities-block"]')
@@ -439,13 +436,43 @@ class UrlSpider(object):
             facilities_list = [fac.text for fac in all_facilities]
             room_facilities_list.append(facilities_list)
 
-        #Extract each room data
+        # Bed type
+        bed_types_elements = self.driver.find_elements(by="xpath", value='//div[@class="hprt-roomtype-bed"]')
+        bed_types_list = []
+
+        for room_bed in bed_types_elements:
+            try:
+                beds = room_bed.find_elements(by="xpath", value='.//span')
+                bed_name = ""
+                for one_bed in beds:
+                    if one_bed.text == "":
+                        continue
+                    else:
+                        bed_name += one_bed.text + "/ "
+
+            except Exception as e:
+                pass
+
+            try:
+                choice = room_bed.find_element(by="xpath", value='.//input')
+                if choice.get_attribute("type") == "radio":
+                    bed_name += "/multiple choice/"
+            except:
+                pass
+
+            if bed_name == "":
+                pass
+            else:
+                bed_types_list.append(bed_name)
+
+        # Extract each room data
         room_number = 0
         for room in rooms:
             room_id = room.get_attribute("data-block-id")
             room_position_table = room.get_attribute("class")
             room_name_temp = room_name[room_number].text
             room_facilities = room_facilities_list[room_number]
+            room_bed_type = bed_types_list[room_number]
 
             # When it is the last row for one room, the room number is changed
             if "hprt-table-last-row" in room_position_table:
@@ -467,6 +494,7 @@ class UrlSpider(object):
             rooms_data[room_id]["room_capacity"] = room_capacity
             rooms_data[room_id]["room_options"] = room_options
             rooms_data[room_id]["room_facilities"] = room_facilities
+            rooms_data[room_id]["room_bed_type"] = room_bed_type
 
         #Store the score of the hotel for the different categories
         try:
@@ -479,16 +507,17 @@ class UrlSpider(object):
         except:
             hotel_scores = {"Empty": "No Data"}
 
-        #Create a dictionary to store all the different features extracted
+        # Create a dictionary to store all the different features extracted
         hotel_dict = {}
 
         hotel_dict["name"] = hotel_name
         hotel_dict["address"] = hotel_address
+        hotel_dict["hotel_coordinates"] = hotel_coordinates
         hotel_dict["hotel_score"] = hotel_score
+        hotel_dict["hotel_scores"] = hotel_scores
         hotel_dict["hotel_description"] = hotel_description
         hotel_dict["features"] = hotel_features
         hotel_dict["room_data"] = rooms_data
-        hotel_dict["hotel_scores"] = hotel_scores
 
 
         self.hotels_list.append(hotel_dict)
