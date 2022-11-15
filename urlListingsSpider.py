@@ -399,7 +399,7 @@ class UrlSpider(object):
         self.driver.switch_to.window(tabs[0])
 
 
-    def get_hotel_data(self, count, search_data):
+    def get_hotel_data(self, count, current_page, in_page_count, search_data):
         #Hotel main attributes
         try:
             hotel_name = self.driver.find_element(by="xpath", value="//h2[contains(@class, ' pp-header__title']").text
@@ -530,12 +530,16 @@ class UrlSpider(object):
         except:
             hotel_scores = {"Empty": "No Data"}
 
+        #Search date
+        search_date = datetime.datetime.today().strftime('%Y-%m-%d')
+
         # Create a dictionary to store all the different features extracted
         hotel_dict = {"city_searched": search_data["city"], "check_in_searched": search_data["checkin"],
                       "check_out_searched": search_data["checkout"], "room_config_searched": search_data["room_config"],
                       "name": hotel_name, "address": hotel_address, "hotel_coordinates": hotel_coordinates,
                       "hotel_score": hotel_score, "hotel_scores": hotel_scores, "hotel_description": hotel_description,
-                      "features": hotel_features, "room_data": rooms_data}
+                      "features": hotel_features, "room_data": rooms_data, "count": count, "current_page": current_page,
+                      "in_page_count": in_page_count, "search_date": search_date}
 
         self.hotels_list.append(hotel_dict)
         time.sleep(2)
@@ -598,7 +602,10 @@ class UrlSpider(object):
 
         keys = self.hotels_list[0].keys()
 
-        with open('hotels_data_{}.csv'.format(city_search), 'w', newline='\n') as output_file:
+        if not os.path.isdir("cities_files/"):
+            os.makedirs("cities_files/")
+
+        with open('cities_files/hotels_data_{}.csv'.format(city_search), 'w', newline='\n') as output_file:
             dict_writer = csv.DictWriter(output_file, keys)
             dict_writer.writeheader()
             dict_writer.writerows(self.hotels_list)
@@ -644,14 +651,16 @@ class UrlSpider(object):
         while current_page <= 1: #end_page:
             #self.save_links(current_page)
             hotels = self.get_blocks()
+            in_page_count = 0
 
             for hotel in hotels[0:2]:
                 print(hotel.get_attribute('href'))
                 print("\n [{}] Retrieving info from hotel {}\n\n".format(str(datetime.datetime.now())[:-7],count))
                 tabs = self.open_hotel(hotel)
-                self.get_hotel_data(count, search_data)
+                self.get_hotel_data(count, current_page, in_page_count, search_data)
                 self.close_hotel(tabs)
                 count += 1
+                in_page_count +=1
                 time.sleep(2)
             
             self.data_to_csv(search_data["city"])
