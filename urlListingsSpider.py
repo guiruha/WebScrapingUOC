@@ -92,17 +92,17 @@ class UrlSpider(object):
 
         #Sign in with google banner
         try:
-            #Wait until warning appears and ccept cookies
-            #wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'continue')))
+            #Change to the pop-up window
+            driver.switch_to.frame(driver.find_element(by="xpath", value="//div[@id='google-one-tap-wrapper']//iframe"))
+            driver.find_element(by="xpath", value='//div[@id="close"]').click()
+
+            #Return to the original window
+            driver.switch_to.default_content()
+
             time.sleep(2)
-            google = driver.find_element(by="xpath", value='//div[@id="google-one-tap-wrapper"]')
-            google.find_element(by="xpath", value='//button[@id="continue"]').click()
-            print(google)
-            print("Google accepted")
+
         except Exception as e:
             print(e)
-            print("Google ignored")
-            pass
 
         print("\n [{}] Driver prepared\n\n".format(str(datetime.datetime.now())[:-7]))
         
