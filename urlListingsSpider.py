@@ -407,7 +407,13 @@ class UrlSpider(object):
             try:
                 hotel_name = self.driver.find_element(by = "xpath", value = "//h2[contains(@class, 'd2fee87262 pp-header__title')]").text
             except:
-                hotel_name = f"Unkown{count}"
+                try:
+                    hotel_name = self.driver.find_element(by="xpath", value='//h2[@class="d2fee87262 pp-header__title"]').text
+                except:
+                    try:
+                        hotel_name = self.driver.find_element(by="xpath", value="//div[@data-capla-component='b-property-web-property-page/PropertyHeaderName']").text
+                    except:
+                        hotel_name = f"Unkown{count}"
                 
         try:
             hotel_address = self.driver.find_element(by="xpath", value='//*[contains(@class, "hp_address_subtitle")]').text
@@ -419,11 +425,17 @@ class UrlSpider(object):
                     hotel_address = self.driver.find_element(by = "xpath", value = "//*[contains(@data-node_tt_id, 'location_score_tooltip')]").text
                 except:
                     hotel_address = "Unknown{count}"
-        
-        try:    
-            hotel_score = self.driver.find_element(by="xpath", value='//*[@class="b5cd09854e d10a6220b4"]').text
+
+        try:
+            hotel_score = self.driver.find_element(by="xpath", value="//div[@class='page-section js-k2-hp--block k2-hp--featured_reviews']//div[@class='b5cd09854e d10a6220b4']").text
         except:
-            hotel_score = -1
+            try:
+                hotel_score = self.driver.find_element(by="xpath", value='//*[@class="b5cd09854e d10a6220b4"]').text
+            except:
+                try:
+                    hotel_score = self.driver.find_element(by="xpath", value="//div[@class='b5cd09854e d10a6220b4']").text
+                except:
+                    hotel_score = -1
 
         try:
             hotel_coordinates = self.driver.find_element(by="xpath", value='//a[@id="hotel_address"]').get_attribute(

@@ -1025,3 +1025,71 @@ JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
 JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
 1668550734978	Marionette	INFO	Stopped listening on port 55642
 console.warn: TopSitesFeed: Failed to fetch data from Contile server: NetworkError when attempting to fetch resource.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/30d44bcc45c5d661a45a5c504751e7ae567075d3.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/30d44bcc45c5d661a45a5c504751e7ae567075d3.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+console.warn: "Listener for event 'frame' did not return a promise."
+1668551857318	geckodriver	INFO	Listening on 127.0.0.1:58803
+1668551857758	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "58804" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilefVGk0i"
+1668551858117	Marionette	INFO	Marionette enabled
+1668551858143	Marionette	INFO	Listening on port 58810
+Read port: 58810
+WebDriver BiDi listening on ws://127.0.0.1:58804
+1668551858272	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilefVGk0i/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:58804/devtools/browser/c9b42253-8289-4b02-b62b-c73889c82e78
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/30d44bcc45c5d661a45a5c504751e7ae567075d3.js, line 1: unreachable code after return statement
+1668551969264	geckodriver	INFO	Listening on 127.0.0.1:59144
+1668551969732	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "59145" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilecWmiRi"
+1668551970052	Marionette	INFO	Marionette enabled
+1668551970079	Marionette	INFO	Listening on port 59152
+Read port: 59152
+WebDriver BiDi listening on ws://127.0.0.1:59145
+1668551970280	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilecWmiRi/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:59145/devtools/browser/669dd237-c1fa-46d4-aae8-cde33c7d41ea
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/30d44bcc45c5d661a45a5c504751e7ae567075d3.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://cf.bstatic.com/static/js/searchresults_cloudfront_sd/30d44bcc45c5d661a45a5c504751e7ae567075d3.js, line 1: unreachable code after return statement
+1668552031106	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1668552063004	Marionette	INFO	Stopped listening on port 59152
+1668552064115	geckodriver	INFO	Listening on 127.0.0.1:59464
+1668552064562	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "59465" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilek4mZlL"
+1668552064871	Marionette	INFO	Marionette enabled
+1668552064897	Marionette	INFO	Listening on port 59471
+Read port: 59471
+WebDriver BiDi listening on ws://127.0.0.1:59465
+1668552065026	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofilek4mZlL/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:59465/devtools/browser/a5694c68-079e-4f9e-a864-b8076b8288ed
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/30d44bcc45c5d661a45a5c504751e7ae567075d3.js, line 1: unreachable code after return statement
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/30d44bcc45c5d661a45a5c504751e7ae567075d3.js, line 1: unreachable code after return statement
+1668552142997	Marionette	INFO	Stopped listening on port 59471
+1668552143883	geckodriver	INFO	Listening on 127.0.0.1:59744
+1668552144320	mozrunner::runner	INFO	Running command: "/Applications/Firefox.app/Contents/MacOS/firefox-bin" "--marionette" "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:106.0) Gecko/20100101 Firefox/106.0" "--remote-debugging-port" "59745" "--remote-allow-hosts" "localhost" "-foreground" "-no-remote" "-profile" "/var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofile1N5w9m"
+1668552144633	Marionette	INFO	Marionette enabled
+1668552144654	Marionette	INFO	Listening on port 59752
+Read port: 59752
+WebDriver BiDi listening on ws://127.0.0.1:59745
+1668552144783	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+UNSUPPORTED (log once): POSSIBLE ISSUE: unit 1 GLD_TEXTURE_INDEX_2D is unloadable and bound to sampler type (Float) - using zero texture because texture unloadable
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /var/folders/cz/qrt2t98500x6_ktt18s0ngpc0000gn/T/rust_mozprofile1N5w9m/search.json.mozlz4", (void 0)))
+DevTools listening on ws://127.0.0.1:59745/devtools/browser/99d1075b-f2a9-46f2-a8f8-7bbb7f0eb25c
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.booking.com."
+JavaScript warning: https://t-cf.bstatic.com/static/js/searchresults_cft/30d44bcc45c5d661a45a5c504751e7ae567075d3.js, line 1: unreachable code after return statement
