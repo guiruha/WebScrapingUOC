@@ -90,6 +90,20 @@ class UrlSpider(object):
         except:
             driver.find_elements(by="xpath", value='//a[@data-lang="en-us"]')[0].click()
 
+        #Sign in with google banner
+        try:
+            #Wait until warning appears and ccept cookies
+            #wait = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'continue')))
+            time.sleep(2)
+            google = driver.find_element(by="xpath", value='//div[@id="google-one-tap-wrapper"]')
+            google.find_element(by="xpath", value='//button[@id="continue"]').click()
+            print(google)
+            print("Google accepted")
+        except Exception as e:
+            print(e)
+            print("Google ignored")
+            pass
+
         print("\n [{}] Driver prepared\n\n".format(str(datetime.datetime.now())[:-7]))
         
         return driver
@@ -294,7 +308,10 @@ class UrlSpider(object):
         try:
             self.driver.find_element(by = "xpath", value = "//*[contains(@class, 'sb-searchbox__button ')]").click()
         except:
-            self.driver.find_element(by = "xpath", value = "//*[contains(@type, 'submit')]").click()
+            try:
+                self.driver.find_element(by = "xpath", value = "//*[contains(@type, 'submit')]").click()
+            except:
+                self.driver.find_element(by="xpath", value="//button[contains(@class, 'fc63351294 a822bdf511 d4b6b7a9e7 cfb238afa1 af18dbd5a4 f4605622ad aa11d0d5cd')]").click()
         try:
             self.set_date(self.checkin, self.checkout)
             time.sleep(2)
@@ -407,6 +424,12 @@ class UrlSpider(object):
             hotel_score = self.driver.find_element(by="xpath", value='//*[@class="b5cd09854e d10a6220b4"]').text
         except:
             hotel_score = -1
+
+        try:
+            hotel_coordinates = self.driver.find_element(by="xpath", value='//a[@id="hotel_address"]').get_attribute(
+                "data-atlas-latlng")
+        except:
+            hotel_coordinates = "NA"
 
         #Hotel features
         hotel_features = []
@@ -525,6 +548,25 @@ class UrlSpider(object):
         if random.randint(1, 100) == 47:
             self.save_photos_random(2, hotel_address)
 
+    def get_search_data(self):
+        city_searched = self.driver.find_element(by="xpath", value='//input[@class="ce45093752"]').get_attribute("value")
+        print("City:")
+        print(city_searched)
+
+        check_in_searched = self.driver.find_element(by="xpath", value='//button[@data-testid="date-display-field-start"]//div[@data-testid="date-display-field-date-in-icon"]').text
+        print("Check-in:")
+        print(check_in_searched)
+
+        check_out_searched = self.driver.find_element(by="xpath",
+                                                     value='//button[@data-testid="date-display-field-end"]//div[@data-testid="date-display-field-date-in-icon"]').text
+        print("Check-out:")
+        print(check_out_searched)
+
+        room_config_searched = self.driver.find_element(by="xpath", value='//button[@data-testid="occupancy-config"]').text
+        print("Room config:")
+        print(room_config_searched)
+
+
     def save_photos_random(self, num_photos, hotel_address):
         """_summary_
 
@@ -591,6 +633,7 @@ class UrlSpider(object):
         self.close_hotel(tabs)
         time.sleep(2)"""
 
+        self.get_search_data()
 
         current_page, end_page = self.obtain_pages()
         while current_page <= 10: #end_page:
