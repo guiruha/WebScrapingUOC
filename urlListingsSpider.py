@@ -399,7 +399,7 @@ class UrlSpider(object):
         self.driver.switch_to.window(tabs[0])
 
 
-    def get_hotel_data(self, count):
+    def get_hotel_data(self, count, current_page, in_page_count, search_data):
         #Hotel main attributes
         try:
             hotel_name = self.driver.find_element(by="xpath", value="//h2[contains(@class, ' pp-header__title']").text
@@ -407,7 +407,13 @@ class UrlSpider(object):
             try:
                 hotel_name = self.driver.find_element(by = "xpath", value = "//h2[contains(@class, 'd2fee87262 pp-header__title')]").text
             except:
-                hotel_name = f"Unkown{count}"
+                try:
+                    hotel_name = self.driver.find_element(by="xpath", value='//h2[@class="d2fee87262 pp-header__title"]').text
+                except:
+                    try:
+                        hotel_name = self.driver.find_element(by="xpath", value="//div[@data-capla-component='b-property-web-property-page/PropertyHeaderName']").text
+                    except:
+                        hotel_name = f"Unkown{count}"
                 
         try:
             hotel_address = self.driver.find_element(by="xpath", value='//*[contains(@class, "hp_address_subtitle")]').text
@@ -419,11 +425,17 @@ class UrlSpider(object):
                     hotel_address = self.driver.find_element(by = "xpath", value = "//*[contains(@data-node_tt_id, 'location_score_tooltip')]").text
                 except:
                     hotel_address = "Unknown{count}"
-        
-        try:    
-            hotel_score = self.driver.find_element(by="xpath", value='//*[@class="b5cd09854e d10a6220b4"]').text
+
+        try:
+            hotel_score = self.driver.find_element(by="xpath", value="//div[@class='page-section js-k2-hp--block k2-hp--featured_reviews']//div[@class='b5cd09854e d10a6220b4']").text
         except:
-            hotel_score = -1
+            try:
+                hotel_score = self.driver.find_element(by="xpath", value='//*[@class="b5cd09854e d10a6220b4"]').text
+            except:
+                try:
+                    hotel_score = self.driver.find_element(by="xpath", value="//div[@class='b5cd09854e d10a6220b4']").text
+                except:
+                    hotel_score = -1
 
         try:
             hotel_coordinates = self.driver.find_element(by="xpath", value='//a[@id="hotel_address"]').get_attribute(
@@ -530,18 +542,16 @@ class UrlSpider(object):
         except:
             hotel_scores = {"Empty": "No Data"}
 
+        #Search date
+        search_date = datetime.datetime.today().strftime('%Y-%m-%d')
+
         # Create a dictionary to store all the different features extracted
-        hotel_dict = {}
-
-        hotel_dict["name"] = hotel_name
-        hotel_dict["address"] = hotel_address
-        hotel_dict["hotel_coordinates"] = hotel_coordinates
-        hotel_dict["hotel_score"] = hotel_score
-        hotel_dict["hotel_scores"] = hotel_scores
-        hotel_dict["hotel_description"] = hotel_description
-        hotel_dict["features"] = hotel_features
-        hotel_dict["room_data"] = rooms_data
-
+        hotel_dict = {"city_searched": search_data["city"], "check_in_searched": search_data["checkin"],
+                      "check_out_searched": search_data["checkout"], "room_config_searched": search_data["room_config"],
+                      "name": hotel_name, "address": hotel_address, "hotel_coordinates": hotel_coordinates,
+                      "hotel_score": hotel_score, "hotel_scores": hotel_scores, "hotel_description": hotel_description,
+                      "features": hotel_features, "room_data": rooms_data, "count": count, "current_page": current_page,
+                      "in_page_count": in_page_count, "search_date": search_date}
 
         self.hotels_list.append(hotel_dict)
         time.sleep(2)
@@ -549,22 +559,28 @@ class UrlSpider(object):
             self.save_photos_random(2, hotel_address)
 
     def get_search_data(self):
+        #City
         city_searched = self.driver.find_element(by="xpath", value='//input[@class="ce45093752"]').get_attribute("value")
         print("City:")
         print(city_searched)
 
-        check_in_searched = self.driver.find_element(by="xpath", value='//button[@data-testid="date-display-field-start"]//div[@data-testid="date-display-field-date-in-icon"]').text
+        #Check-in date
+        check_in_searched = self.driver.find_element(by="xpath", value='//button[@data-testid="date-display-field-start"]').text
         print("Check-in:")
         print(check_in_searched)
 
-        check_out_searched = self.driver.find_element(by="xpath",
-                                                     value='//button[@data-testid="date-display-field-end"]//div[@data-testid="date-display-field-date-in-icon"]').text
+        #Check-out date
+        check_out_searched = self.driver.find_element(by="xpath", value='//button[@data-testid="date-display-field-end"]').text
         print("Check-out:")
         print(check_out_searched)
 
+        #Room configuration
         room_config_searched = self.driver.find_element(by="xpath", value='//button[@data-testid="occupancy-config"]').text
         print("Room config:")
         print(room_config_searched)
+
+        return {"city": city_searched, "checkin": check_in_searched,
+                "checkout": check_out_searched, "room_config": room_config_searched}
 
 
     def save_photos_random(self, num_photos, hotel_address):
@@ -594,20 +610,28 @@ class UrlSpider(object):
                 print("An error ocurred with the name of the directory")
                 pass
             
-    def data_to_csv(self):
+    def data_to_csv(self, city_search):
 
         keys = self.hotels_list[0].keys()
+
+        if not os.path.isdir("cities_files/"):
+            os.makedirs("cities_files/")
+
+        with open('cities_files/hotels_data_{}.csv'.format(city_search), 'w', newline='\n') as output_file:
+            dict_writer = csv.DictWriter(output_file, keys)
+            dict_writer.writeheader()
+            dict_writer.writerows(self.hotels_list)
         
-        if os.path.isfile('hotels_data.csv'):
-            with open('hotels_data.csv', 'a+', newline='\n') as output_file:
+        """if os.path.isfile('hotels_data_{}.csv'.format(city_search)):
+            with open('hotels_data_{}.csv'.format(city_search), 'a+', newline='\n') as output_file:
                 dict_writer = csv.DictWriter(output_file, keys)
                 dict_writer.writerows(self.hotels_list)
 
         else:
-            with open('hotels_data.csv', 'w', newline='\n') as output_file:
+            with open('hotels_data_{}.csv'.format(city_search), 'w', newline='\n') as output_file:
                 dict_writer = csv.DictWriter(output_file, keys)
                 dict_writer.writeheader()
-                dict_writer.writerows(self.hotels_list)
+                dict_writer.writerows(self.hotels_list)"""
 
 
     def main(self):
@@ -633,23 +657,25 @@ class UrlSpider(object):
         self.close_hotel(tabs)
         time.sleep(2)"""
 
-        self.get_search_data()
+        search_data = self.get_search_data()
 
         current_page, end_page = self.obtain_pages()
-        while current_page <= 10: #end_page:
+        while current_page <= 1: #end_page:
             #self.save_links(current_page)
             hotels = self.get_blocks()
+            in_page_count = 0
 
-            for hotel in hotels:
+            for hotel in hotels[0:2]:
                 print(hotel.get_attribute('href'))
                 print("\n [{}] Retrieving info from hotel {}\n\n".format(str(datetime.datetime.now())[:-7],count))
                 tabs = self.open_hotel(hotel)
-                self.get_hotel_data(count)
+                self.get_hotel_data(count, current_page, in_page_count, search_data)
                 self.close_hotel(tabs)
                 count += 1
+                in_page_count +=1
                 time.sleep(2)
             
-            self.data_to_csv()
+            self.data_to_csv(search_data["city"])
 
             self.next_page()
             current_page += 1
