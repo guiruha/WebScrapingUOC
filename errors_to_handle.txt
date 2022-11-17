@@ -1,3 +1,0 @@
-Error involving line 473 --> function get_hotel_data:
-    selenium.common.exceptions.NoSuchElementException: Message: Unable to locate element: //*[contains(@class, "hp_address_subtitle")]
-    CHECKEA MI SOLUCIÓN A VER SI TE CUADRA
