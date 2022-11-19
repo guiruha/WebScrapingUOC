@@ -1,4 +1,4 @@
-# Web Scraping UOC
+# Web Scraping UOC | Booking.com
 
 ## Summary
 
@@ -13,7 +13,7 @@ The projects aims to apply web scraping techniques to extract data from Booking.
 * Guillem Rochina Aguas (@guiruha)
 
 ## Files
-
+```bash
 ────WebscrapingUOC
     │
     ├───dataset
@@ -39,7 +39,7 @@ The projects aims to apply web scraping techniques to extract data from Booking.
     │
     │
     └───requirements.txt
-
+```
 - **dataset/hotels_data.csv**: Output dataset containing all the info scraped
 - **dataset/hotel_images/hotel_name/image_{}.png**: Directory containing photos extracted from each hotel scraped
 - **source/BookingScraper.py**: Script containing all the design and implementation of the web scraper
@@ -64,6 +64,21 @@ or install all the required packages in your own environment with the following 
 $ pip install -r requirements.txt
 ```
 
+In any case, a list of the libraries used in this project is presented below:
+
+```
+time
+csv
+collections
+os
+datetime
+random
+urllib
+selenium
+webdriver_manager
+sys
+```
+
 ## How to run the project
 
 For the moment you can start the project from the beginning using the following command:
@@ -83,6 +98,12 @@ In Version 1.0 of the project the scraper starts in the first landing page of Bo
 ## License
 
 The license of the resulting dataset is **Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**
+
+## Disclaimer
+
+This project's goal is purely educational and for research and learning purposes. The consequences of any action in which the elements contained in this repository may be involved are the solely responisibility of its actor, that is to say, the authors will not be held responsible in case of any kind of misuse of the presnt material which may bring criminal charges against the person involved.
+
+According to section A14.2 of Booking's terms of service no one is allowed to copy data from Booking.com with commercial intentions, including all kind of information that can be found in its webpage (hotel descriptions, photos, prices, etc.). Therefore, precaution is adviced.
 
 ## Resources
 

@@ -1,7 +1,5 @@
 import os
 import sys
-import csv
-import pandas as pd
 from BookingScraper import BookingSpider
 
 if __name__ == "__main__":

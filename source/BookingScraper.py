@@ -16,6 +16,9 @@ from webdriver_manager.firefox import GeckoDriverManager
 
 # DEFINITION OF THE SPIDER CLASS
 class BookingSpider(object):
+    ##-----------------------------------------------------------------------------##
+    ##              SET UP OF THE WEBDRIVER AND ENTERING LANDING PAGE              ##
+    ##-----------------------------------------------------------------------------##
     def __init__(self, checkin, checkout, city, adults, children, rooms):
         """
         Initiates the instance of the class
@@ -69,7 +72,7 @@ class BookingSpider(object):
         # For maximizing window in case we are not using the headless mode
         driver.maximize_window()
         try:
-            #Wait until warning appears and ccept cookies
+            #Wait until warning appears and accept cookies
             wait = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
             driver.find_element(By.ID, "onetrust-accept-btn-handler").click()
         # IN case the cookies policy button is not found the script waits until it can introduce the search criteria in the web page searcher
@@ -89,6 +92,8 @@ class BookingSpider(object):
 
         except:
             driver.find_elements(by="xpath", value='//a[@data-lang="en-us"]')[0].click()
+        
+        time.sleep(5)
 
         #Close google banner
         try:
@@ -107,6 +112,10 @@ class BookingSpider(object):
         print("\n [{}] | INFO | Driver prepared\n\n".format(str(datetime.datetime.now())[:-7]))
         
         return driver
+    
+    ##-----------------------------------------------------------------------------##
+    ##            INPUTING SEARCH PARAMETERS AND SEARCHING FOR RESULTS             ##
+    ##-----------------------------------------------------------------------------##
     
     def get_selection_numbers(self):
         """
@@ -339,6 +348,12 @@ class BookingSpider(object):
                 self.driver.find_element(by = "xpath", value = "//*[contains(@type, 'submit')]").click()
             except:
                 self.driver.find_element(by="xpath", value="//button[contains(@class, 'fc63351294 a822bdf511 d4b6b7a9e7 cfb238afa1 af18dbd5a4 f4605622ad aa11d0d5cd')]").click()
+        # If the Genius ad appears close it, if not pass
+        try:
+            wait = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS, 'fc63351294 a822bdf511 e3c025e003 fa565176a8 f7db01295e ae1678b153')))
+            self.driver.find_element(by="xpath", value="//button[contains(@class, 'fc63351294 a822bdf511 e3c025e003 fa565176a8 f7db01295e ae1678b153'')]").click()
+        except:
+            pass
         # Introduce data in the calendar using the previously defined function
         try:
             self.set_date(self.checkin, self.checkout)
@@ -385,6 +400,10 @@ class BookingSpider(object):
             None
         """
         self.driver.find_element(by = "xpath", value = "//*[contains(@aria-label, 'Next page')]").click()
+    
+    ##-----------------------------------------------------------------------------##
+    ##          RETRIEVING DATA FROM ALL THE HOTELS FOUND IN THE SERARCH           ##
+    ##-----------------------------------------------------------------------------##
 
     def open_hotel(self, hotel):
 
@@ -612,6 +631,10 @@ class BookingSpider(object):
                 print("An error ocurred with the name of the directory")
                 pass
             
+    ##-----------------------------------------------------------------------------##
+    ##                     SAVING THE RESULTS IN A CSV FILE                        ##
+    ##-----------------------------------------------------------------------------##
+    
     def data_to_csv(self):
 
         keys = self.hotels_list[0].keys()
@@ -632,6 +655,10 @@ class BookingSpider(object):
         
         self.hotels_list = []
                 
+    ##-----------------------------------------------------------------------------##
+    ##                        RUN ALL THE PROCESS AT ONCE                          ##
+    ##-----------------------------------------------------------------------------##
+    
     def main(self):
         """
         General function that comprehends the process of all the actions performed by this class and finally closes the
