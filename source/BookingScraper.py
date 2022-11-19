@@ -65,13 +65,12 @@ class BookingSpider(object):
         options.add_argument(f"user-agent={user_agent}")
         driver = webdriver.Firefox(service=webdriver.firefox.service.Service(GeckoDriverManager().install()), options=options)
         driver.get(url)
-        time.sleep(2)
+        time.sleep(3)
         # For maximizing window in case we are not using the headless mode
         driver.maximize_window()
-        driver.implicitly_wait(2)
         try:
             #Wait until warning appears and ccept cookies
-            wait = WebDriverWait(driver, 2).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
+            wait = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.ID, 'onetrust-accept-btn-handler')))
             driver.find_element(By.ID, "onetrust-accept-btn-handler").click()
         # IN case the cookies policy button is not found the script waits until it can introduce the search criteria in the web page searcher
         # In particular id "ss" references the place where the name of the city is introduced.
@@ -238,7 +237,6 @@ class BookingSpider(object):
         inputed_month = False
         # While the inputed month does not equal the month that is shown in the calendar the process does not stop
         while inputed_month != True:
-            time.sleep(2)
             try:
                 # We obtain the name of the month and year in the calendar (the left calendar of the two that are displayed in the page)
                 current_date = self.driver.find_element(by="xpath", value="//*[contains(@aria-live, 'polite')]").text
@@ -392,7 +390,6 @@ class BookingSpider(object):
 
         #Click on the hotel link
         hotel.click()
-        #self.driver.find_element(by="xpath", value='//div[@class="fcab3ed991 a23c043802"]').click()
 
         #Wait for the tab to open
         wait = WebDriverWait(self.driver, 10).until(EC.number_of_windows_to_be(2))
@@ -414,6 +411,9 @@ class BookingSpider(object):
 
     def get_hotel_data(self, count, current_page, in_page_count):
         #Hotel main attributes
+        # All info has been retieved using several try and except due to the fact that the webdriver sometimes finds difficulties when searching
+        # the xpath
+        # Hotel name
         try:
             hotel_name = self.driver.find_element(by="xpath", value="//h2[contains(@class, ' pp-header__title']").text
         except:
@@ -427,7 +427,8 @@ class BookingSpider(object):
                         hotel_name = self.driver.find_element(by="xpath", value="//div[@data-capla-component='b-property-web-property-page/PropertyHeaderName']").text
                     except:
                         hotel_name = f"Unkown{count}"
-                
+        
+        # Hotel address
         try:
             hotel_address = self.driver.find_element(by="xpath", value='//*[contains(@class, "hp_address_subtitle")]').text
         except:
@@ -439,6 +440,7 @@ class BookingSpider(object):
                 except:
                     hotel_address = f"Unknown{count}"
 
+        # Hotel score
         try:
             hotel_score = self.driver.find_element(by="xpath", value="//div[@class='page-section js-k2-hp--block k2-hp--featured_reviews']//div[@class='b5cd09854e d10a6220b4']").text
         except:
@@ -449,7 +451,8 @@ class BookingSpider(object):
                     hotel_score = self.driver.find_element(by="xpath", value="//div[@class='b5cd09854e d10a6220b4']").text
                 except:
                     hotel_score = -1
-
+        
+        # Hotel coordinates
         try:
             hotel_coordinates = self.driver.find_element(by="xpath", value='//a[@id="hotel_address"]').get_attribute(
                 "data-atlas-latlng")
@@ -478,6 +481,7 @@ class BookingSpider(object):
         # Get the main features of the different rooms
         room_facilities_blocks = self.driver.find_elements(by="xpath", value='//div[@class="hprt-facilities-block"]')
 
+        # Get the list of all room facilities
         room_facilities_list = []
         for room in room_facilities_blocks:
             all_facilities = room.find_elements(by="xpath", value='.//div[@class="hprt-facilities-facility"]')
@@ -567,27 +571,37 @@ class BookingSpider(object):
                       "in_page_count": in_page_count, "search_date": search_date}
 
         self.hotels_list.append(hotel_dict)
-        time.sleep(2)
-        if random.randint(1, 30) == 5:
+        time.sleep(5)
+        # In order to avoid downloading all photos, we use the random library to only download photos from 
+        # 1/50 of the hotels scraped.
+        if random.randint(1, 50) == 5:
             self.save_photos_random(2, hotel_address)
 
     def save_photos_random(self, num_photos, hotel_address):
-        """_summary_
+        """Opens the grid of photos for each hotel scrapped and downloads only a determined number of photos of them
 
         Args:
-            num_photos (_type_): _description_
+            num_photos (int): number of photos to download per hotel
+            
+        Returns:
+            None
         """
         save_path = f"dataset/hotel_images/{hotel_address}"
+        # Create a directory if it does not exists
         try:
             os.makedirs(save_path)
         except:
             print("Directory already exists")
             pass
+        # Open the photos grid
         self.driver.find_element(by = "xpath", value = "//a[contains(@class,'bh-photo-grid-item bh-photo-grid-thumb js-bh-photo-grid-item-see-all')]").click()
         photos = self.driver.find_elements(by = "xpath", value = "//img[contains(@class, 'bh-photo-modal-grid-image')]")
+        # Some elements retrieved in the previous line are empty so we eliminate them if there is no link of the photo
         photos_clean = [x for x in photos if x.get_attribute('src') != None]
+        # If there are not photos the directory will be empty
         if len(photos_clean) == 0:
             return None
+        # For a range determined by the variable num_photos we select a random photo of the grid in each iteration
         for num in range(num_photos):
             index = random.randint(0, len(photos_clean)-1)
             src = photos[index].get_attribute('src')
@@ -636,9 +650,9 @@ class BookingSpider(object):
             pass
         
         current_page, end_page = self.obtain_pages()
+        
         #If we wanted to get all the listings from this search we would use end_page instead of 5 (but for our purposes, and in order
         # to not create a csv with too much weight we extract data only from the first 5 pages)
-        
         while current_page <= 5:
             hotels = self.get_blocks()
             in_page_count = 0
@@ -650,8 +664,9 @@ class BookingSpider(object):
                 self.close_hotel(tabs)
                 count += 1
                 in_page_count += 1
-                time.sleep(2)
+                time.sleep(3)
             
+            # After retrieving data of each hotels from the current pages, the info is saved  
             self.data_to_csv()
 
             self.next_page()

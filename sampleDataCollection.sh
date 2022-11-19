@@ -1,4 +1,3 @@
-source activate scraping-uoc
 python source/runScraper.py "12-March-2023" "16-March-2023" "Barcelona" 4 1 2
 python source/runScraper.py "12-March-2023" "16-March-2023" "Barcelona" 5 3 3
 python source/runScraper.py "12-March-2023" "16-March-2023" "Madrid" 2 3 2
