@@ -17,14 +17,14 @@ The projects aims to apply web scraping techniques to extract data from Booking.
 ────WebscrapingUOC
     │
     ├───dataset
-    |   │
-    |   └───── hotel_images
-    |          │
-    |          └─── "hotel_name"/image_{}.png
-    |          hotels_data.csv
+    │   │
+    │   └───── hotel_images
+    │          │
+    │          └─── "hotel_name"/image_{}.png
+    │          hotels_data.csv
     ├──source
-    |         BookingScraper.py
-    |         runScraper.py
+    │         BookingScraper.py
+    │         runScraper.py
     │
     ├───Memoria.pdf
     │
@@ -34,7 +34,7 @@ The projects aims to apply web scraping techniques to extract data from Booking.
     │
     ├───LICENSE.md
     │
-    |
+    │
     ├───envrionment.yml       
     │
     │
@@ -108,5 +108,7 @@ According to section A14.2 of Booking's terms of service no one is allowed to co
 ## Resources
 
 Lawson, R. (2015). Web Scraping with Python. Packt Publishing Ltd. 
+
 Mitchel, R. (2015). Web Scraping with Python: Collecting Data from the Modern Web. O'Reilly Media, Inc.
+
 Calvo, M. & Subirats, L. (2019). Web Scraping. Editorial UOC.
