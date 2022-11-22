@@ -50,6 +50,8 @@ The projects aims to apply web scraping techniques to extract data from Booking.
 - **environment.yml**: Yaml of the conda environment used in this project
 - **requirements.txt**: List of all python libraries used in this project
 
+* Zenodo's DOI for the dataset: https://doi.org/10.5281/zenodo.7337369
+
 ## How to set the environment to run the project correctly
 
 In order to be able to run this project in your machine you need to either create the next environment:
