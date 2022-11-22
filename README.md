@@ -50,7 +50,9 @@ The projects aims to apply web scraping techniques to extract data from Booking.
 - **environment.yml**: Yaml of the conda environment used in this project
 - **requirements.txt**: List of all python libraries used in this project
 
-* Zenodo's DOI for the dataset: https://doi.org/10.5281/zenodo.7337369
+## Zenodo's DOI 
+
+Zenodo's DOI for the dataset available in: https://doi.org/10.5281/zenodo.7337369
 
 ## How to set the environment to run the project correctly
 
@@ -83,7 +85,7 @@ sys
 
 ## How to run the project
 
-For the moment you can start the project from the beginning using the following command:
+You can start the process from the beginning using the following command:
 
 ```shell
 $ python source/runScraper.py str(checkin_date) str(checkout_date) str(city) int(nºadults) int(nºchildren) int(nº rooms)
@@ -94,8 +96,6 @@ To be more illustrative, the following example is given:
 ```shell
 $ python source/runScraper.py "27-January-2023" "5-February-2023" "Valencia" 2 3 2
 ```
-
-In Version 1.0 of the project the scraper starts in the first landing page of Booking.com and performs the selections of the criteria inputed when running the script. Once all criteria is filled and results are given, it starts collecting the urls of all listings in the results (page by page, until the last page is reached). For the moment, all links are stored in the file "listing_links.txt".
 
 ## License
 
